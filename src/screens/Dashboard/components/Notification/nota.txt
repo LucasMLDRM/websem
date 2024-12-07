@@ -1,0 +1,2 @@
+relsult es un string texto libre
+status es resuelto o cancelado

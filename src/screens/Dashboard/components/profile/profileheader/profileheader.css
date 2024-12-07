@@ -1,0 +1,37 @@
+/* Contenedor principal */
+.header-planillas-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex; /* Usamos flex para alinear los elementos en una fila */
+    justify-content: space-between; /* Alinea el contenido entre el título y el input */
+    align-items: center; /* Centra verticalmente los elementos */
+  
+  }
+  
+  /* Título */
+  .header-planillas-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem; /* Elimina el margen inferior */
+    color: white;
+    display: flex; /* Usamos flex para alinear el icono y el texto */
+    align-items: center; /* Centra el icono y el texto verticalmente */
+    gap: 8px; /* Ajusta el espacio entre el icono y el texto */
+  }
+  
+  /* Input */
+  .header-planillas-search-input {
+    width: 100%;
+    max-width: 28rem; /* Tamaño máximo para la barra de búsqueda */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FC308C;
+    border-radius: 2rem 0 2rem 0;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    background-color: #ffffff00;
+    color: #FC308C;
+  }
+  
+  .header-planillas-search-input::placeholder {
+    color: #FC308C; /* Cambia el color aquí */
+  }
+  

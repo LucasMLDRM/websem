@@ -1,0 +1,170 @@
+.contai {
+  background-color: rgba(255, 255, 255, 0);
+  scale: 1.1;
+}
+
+.notification-popup h3 {
+  font-size: 24px;
+  color: var(--fucsia);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.titulo-noti {
+  color: #ffffff;
+  font-size: 34px;
+}
+
+.table-container {
+  border-radius: 1rem;
+  overflow: hidden; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+table th:first-child {
+  border-top-left-radius: 1rem;
+}
+
+table th:last-child {
+  border-top-right-radius: 1rem;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 1rem;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 1rem;
+}
+
+table th {
+  background-color: var(--fucsia);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+table td {
+  background-color: #fff;
+  color: #333;
+}
+
+table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.notification-popup::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  background-color: var(--fucsia-claro);
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+button:hover {
+  background-color: var(--fucsia-oscuro);
+  transform: translateY(-2px);
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(252, 48, 140, 0.3);
+}
+
+.resolve-notification {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 1rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.resolve-notification h4 {
+  font-size: 20px;
+  color: var(--fucsia);
+  margin-bottom: 15px;
+}
+
+.resolve-notification label {
+  display: block;
+  margin: 10px 0;
+  color: #333;
+}
+
+.resolve-notification select {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.resolve-notification button {
+  margin-right: 10px;
+}
+
+.notification-popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notification-popup::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+
+
+
+.titulo-noti {
+  display: flex;
+  align-items: center; 
+  gap: 8px; 
+  color: #ffffff;
+  font-size: 34px;
+}
+
+.logonoti {
+  font-size: 34px; 
+  
+}
+
+.text-popu{
+  color: black;
+}
+
+
+
+
+.textoss{
+  color: #333;
+}

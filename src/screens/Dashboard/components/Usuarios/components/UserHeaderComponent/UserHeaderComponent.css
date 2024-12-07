@@ -1,0 +1,52 @@
+.header-users{
+
+    margin-bottom: -5rem;
+    padding-bottom: -5rem;
+}
+.align-tit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.us-title{
+  font-size: 2rem;
+  margin-bottom: 1rem; /* Elimina el margen inferior */
+  color: white;
+  display: flex; /* Usamos flex para alinear el icono y el texto */
+  align-items: center; /* Centra el icono y el texto verticalmente */
+  gap: 12px; /* Ajusta el espacio entre el icono y el texto */
+}
+
+.sect-txt{
+    background-color: var(--fucsia-claro);
+    color: aliceblue;
+}
+
+
+.search-bar {
+    display: flex;
+    justify-content:end;
+      align-items:center;
+      width: 100%;
+}
+    
+
+
+
+.search-bar input {
+    width: 100%;
+    max-width: 20rem; /* Tamaño máximo para la barra de búsqueda */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FC308C;
+    border-radius: 2rem 0 2rem 0;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    background-color: #ffffff00;
+    color: #FC308C;
+  }
+  
+  .search-bar input::placeholder {
+    color: #FC308C;
+  }
+  

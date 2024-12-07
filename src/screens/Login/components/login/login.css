@@ -1,0 +1,20 @@
+.login-cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-text{
+    color: #0039E4;
+}
+
+.center-logo img {
+    width: 80%;
+}
+
+.center-logo{
+    display: flex;
+    justify-content: center;
+    
+}

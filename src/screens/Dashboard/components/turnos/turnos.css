@@ -1,0 +1,393 @@
+/* .turnos-container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5BA0CE;
+  }
+  
+  .tabla-turnos {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  
+  .tabla-turnos th, 
+  .tabla-turnos td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .tabla-turnos th {
+    background-color: #5BA0CE;
+    color: white;
+  } */
+
+
+
+
+
+
+  /* .turnos-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .tabla-turnos {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  
+  .tabla-turnos th, .tabla-turnos td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+  
+  .tabla-turnos th {
+    background-color: #5BA0CE;
+    color: white;
+  }
+  
+  .tabla-turnos td {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla-turnos tr:nth-child(even) td {
+    background-color: #f1f1f1;
+  }
+  
+  .tabla-turnos td {
+    font-size: 14px;
+  } */
+  
+
+
+
+
+
+
+  .turnos-container {
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    height: 90vh;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--dark-blue);
+  }
+  
+  .tabla-turnos {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .tabla-turnos th, .tabla-turnos td {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .tabla-turnos th {
+    background-color: var(--fucsia); /* Color Fucsia */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: normal; /* Permite que el texto se ajuste */
+    white-space: nowrap;
+  }
+  
+  .tabla-turnos td {
+    background-color: #fff;
+    color: #333;
+    white-space: nowrap; /* Evita que el texto se contraiga */
+    overflow: hidden; /* Evita que el contenido desborde */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es muy largo */
+  }
+  
+  .tabla-turnos tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-turnos tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .tabla-turnos tr:last-child {
+    border-bottom: none;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .semana-selector {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .semana-selector button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    background-color: #5BA0CE;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .semana-selector button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .semana-selector button:hover:not(:disabled) {
+    background-color: #4a8ab1;
+  }
+  
+
+
+
+
+  .busqueda-container {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    margin-bottom: 20px;
+  }
+  
+  .turn-title {
+    font-size: 2.5rem;
+ /* Elimina el margen inferior */
+ margin-bottom: -2.5rem;
+    color: white;
+    display: flex; /* Usamos flex para alinear el icono y el texto */
+    align-items: left; /* Centra el icono y el texto verticalmente */
+    gap: 8px; /* Ajusta el espacio entre el icono y el texto */
+  }
+
+
+  .turn-search-input {
+    width: 100%;
+    max-width: 28rem; /* Tamaño máximo para la barra de búsqueda */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FC308C;
+    border-radius: 2rem 0 2rem 0;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    background-color: #ffffff00;
+    color: #FC308C;
+  }
+  
+  .turn-search-input::placeholder {
+    color: #FC308C; /* Cambia el color aquí */
+  }
+  
+  
+  .btn-crear-turno {
+    background: linear-gradient(to left , #fa539e, #bf256a); /* Color principal */
+    color: white;
+    margin-top: 1rem;
+    margin-left: 0;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+  
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .btn-crear-turno:hover {
+    transition: all 0.2s ease-in-out;
+    background: linear-gradient(to top , #bf256a, #fa539e);
+    box-shadow: 0px 2px 6px #fa539e4f; 
+  }
+
+
+
+
+
+
+  .dropdown-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 14px;
+    background-color: inherit; /* Mismo fondo que la tabla */
+    color: inherit; /* Color de letra igual a la tabla */
+    z-index: 2;
+  }
+  
+  .dropdown-content {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: inherit; /* Mismo fondo que el header */
+    color: inherit;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombras sutiles */
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none; /* No interactuable cuando está oculto */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición para animación fluida */
+    border-radius: 0.5rem;
+  }
+  
+  .dropdown-container:hover .dropdown-content {
+    opacity: 1;
+    pointer-events: auto; /* Ahora es interactuable */
+    transform: translateX(-50%) translateY(10px); /* Animación de deslizamiento */
+  }
+  
+  .dropdown-container:hover .dropdown-content ul {
+    pointer-events: auto;
+  }
+  
+  .dropdown-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-content ul li {
+    padding: 8px 16px;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .dropdown-content ul li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Cambio sutil en el hover */
+  }
+  
+  .dropdown-container span {
+    padding: 3px;
+    font-size: 14px;
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+  }
+  
+
+
+
+
+
+
+
+
+
+  .btn-eliminar {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #e74c3c; /* Color rojo para el icono de eliminar */
+  }
+  
+  .btn-eliminar svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+
+
+
+
+
+
+  .btn-editar {
+    background-color: var(--fucsia-claro);
+    border-radius: 1rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    color: white; /* Color azul para el botón de editar */
+    border: none;
+  }
+
+  .btn-editar:hover{
+    transition: all 0.3s;
+    background-color: var(--fucsia-oscuro);
+  }
+  
+
+
+/* .arrow-down{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1480px) {
+  .tabla-turnos {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .turnos-container{
+    scale: 0.85;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+  

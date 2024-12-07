@@ -1,0 +1,111 @@
+.view-plan {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .planilla-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .plan-tex{
+    color: #fff;
+  }
+
+  .planilla-field {
+    margin-bottom: 10px;
+    margin-right: 3px;
+  }
+  
+  .planilla-field label {
+    font-weight: bold;
+  }
+
+  .name-plan-inp{
+    border-radius: 1rem;
+    background-color: #ffffff;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(202, 202, 202);
+  }
+
+/* CSS para el select */
+.stat-sel {
+  -webkit-appearance: none; 
+  -moz-appearance: none;   
+  appearance: none;         
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 2rem; 
+  background-color: white;
+  background-image: url('http://www.w3.org/2000/svg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  font-size: 14px;
+}
+
+
+  
+  .steps-list {
+    margin-top: 20px;
+    color: black;
+  }
+  
+  .step-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .step-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .step-field label {
+    font-weight: bold;
+  }
+  
+  .step-field input[type="checkbox"] {
+    transform: scale(1.2);
+  }
+  
+
+  .save-button{
+    
+    background-color: var(--fucsia);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 1rem;
+    margin-left: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .save-button:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+
+  /* @media only screen and (min-width: 1268px) {
+    .view-plan {
+      transform: scale(1.1); 
+    }
+  }
+
+  @media only screen and (max-width: 968px) {
+    .view-plan {
+      transform: scale(0.9);
+      margin-right: -20px; 
+    }
+  } */

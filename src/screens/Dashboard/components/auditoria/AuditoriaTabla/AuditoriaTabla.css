@@ -1,0 +1,130 @@
+.filtros {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .filtros select,
+  .filtros input[type="date"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+  }
+  
+  .filtros select:hover,
+  .filtros input[type="date"]:hover {
+    border-color: #ff0095;
+    background-color: #fff;
+  }
+  
+  .filtros select:focus,
+  .filtros input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  .tabla-auditorias {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .tabla-auditorias th,
+  .tabla-auditorias td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabla-auditorias th {
+    background-color: #f1f1f1;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .tabla-auditorias tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .tabla-auditorias button {
+    padding: 0.25rem 0.75rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tabla-auditorias button:hover {
+    background-color: #0056b3;
+  }
+  
+  .tabla-auditorias button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+
+
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top: 2px solid #007bff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+
+
+
+
+  .tabla-auditorias button {
+    position: relative; /* Necesario para posicionar el spinner dentro del botón */
+    padding: 0.1rem 0.5rem; /* Padding interno para el botón */
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 120px; /* Tamaño mínimo para el botón */
+    height: 40px; /* Ajustamos la altura para que el botón no se achique */
+    display: flex; /* Usamos flexbox para alinear texto y spinner */
+    justify-content: center; /* Centra el texto */
+    align-items: center; /* Centra el texto */
+    text-align: center; /* Asegura que el texto esté centrado */
+  }
+  
+  
+  .tabla-auditorias button .spinner {
+    position: absolute; /* Posiciona el spinner dentro del botón */
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top: 2px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    z-index: 1; /* Asegura que el spinner quede encima del texto */
+  }
+  
+  /* Animación para el spinner */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,0 +1,55 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+  }
+  
+  .mod-content {
+    background-color: white; /* Fondo blanco para el modal */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    width: 90%;
+    max-width: 600px; /* Ancho máximo del modal */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .step {
+    margin-bottom: 10px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; /* Espacio entre botones */
+  }
+  
+  .mod-button {
+    background-color: var(--fucsia); /* Color principal */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin-left: 15px;
+  }
+  
+  .mod-button:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+  

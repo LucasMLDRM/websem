@@ -1,0 +1,152 @@
+   .profile-cont {
+    position: relative;
+    width: 50rem;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f900;
+    border-radius: 10px;
+
+    color: #000; 
+  }
+  
+
+
+
+  .profile-title {
+    text-align: center;
+    vertical-align: middle;
+    color: white; 
+    font-size: 25px;
+
+  }
+  
+  .profile-card {
+    background-color: #fff;
+    color: #f9f9f900;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-item {
+    margin-bottom: 10px;
+    color: #000; 
+    border-bottom: solid 1px var(--fucsia);
+  }
+  
+  .profile-label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #000; 
+  }
+  
+  .change-password-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: var(--fucsia);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.6s;
+  }
+  
+  .change-password-button:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--fucsia);
+  }
+  
+  .close-modal:hover {
+    color: var(--fucsia-oscuro);
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .password-field {
+    display: flex;
+    align-items: center;
+  }
+  
+  .show-password-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .submit-pass, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .submit-pass {
+    background-color: var(--fucsia);
+    color: #fff;
+  }
+  
+  .submit-pass:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+  
+  .cancel-btn {
+    background-color: var(--celeste-real);
+    color: #fff;
+  }
+  
+  .cancel-btn:hover {
+    background-color: var(--celeste-claro);
+  }
+  
+  .icon-user{
+    margin-bottom: -2rem;
+  }
+
+  .back-button-profile {
+    color: var(--fucsia);
+    font-size: 40px;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    vertical-align: middle;
+  }
+  

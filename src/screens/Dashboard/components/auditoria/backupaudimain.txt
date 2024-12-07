@@ -1,0 +1,3311 @@
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaModal/AuditoriaModal.tsx';
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// interface User {
+//   id: number;
+//   userName: string;
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<User[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [searchTerm, setSearchTerm] = useState<string>(''); // Barra de búsqueda
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   // Fetch pacientes
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+//     obtenerPacientes();
+//   }, [token]);
+
+//   // Load auditorias de forma hardcoded por ahora
+//   useEffect(() => {
+//     const hardcodedAuditorias: Auditoria[] = [
+//       {
+//         id: 1,
+//         patientName: 'Juan Pérez',
+//         carerName: 'Maria Lopez',
+//         loadDate: '2024-10-10',
+//         spreadsheetName: 'Planilla 1',
+//         consulta: 'Consulta general',
+//         steps: [
+//           { text: 'Paso 1', isRequired: true, answerType: 1, options: '', response: 'Respuesta 1' },
+//           { text: 'Paso 2', isRequired: true, answerType: 2, options: '', response: '10' }
+//         ]
+//       },
+//       {
+//         id: 2,
+//         patientName: 'Ana Gomez',
+//         carerName: 'Carlos Ruiz',
+//         loadDate: '2024-10-09',
+//         spreadsheetName: 'Planilla 2',
+//         consulta: 'Consulta especializada',
+//         steps: [
+//           { text: 'Paso 1', isRequired: true, answerType: 1, options: '', response: 'Respuesta 2' }
+//         ]
+//       }
+//     ];
+//     setAuditorias(hardcodedAuditorias);
+//   }, []);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSearchTerm(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     console.log(auditoriaEdit);
+//     setShowModal(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     const matchesSearch = auditoria.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//       auditoria.carerName.toLowerCase().includes(searchTerm.toLowerCase());
+//     return matchesPaciente && matchesFecha && matchesSearch;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+
+//         <div className="form-group">
+//           <label>Buscar</label>
+//           <input type="text" value={searchTerm} onChange={handleSearchChange} placeholder="Buscar por nombre o cuidador" />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaModal/AuditoriaModal.tsx';
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// interface User {
+//   id: number;
+//   userName: string;
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<User[]>([]);
+//   const [asistentes, setAsistentes] = useState<User[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+
+//   // Cargar auditorías hardcodeadas por ahora
+//   useEffect(() => {
+//     const hardcodedAuditorias: Auditoria[] = [
+//       {
+//         id: 1,
+//         patientName: 'Juan Pérez',
+//         carerName: 'Maria Lopez',
+//         loadDate: '2024-10-10',
+//         spreadsheetName: 'Planilla 1',
+//         consulta: 'Consulta general',
+//         steps: [
+//           { text: 'Paso 1', isRequired: true, answerType: 1, options: '', response: 'Respuesta 1' },
+//           { text: 'Paso 2', isRequired: true, answerType: 2, options: '', response: '10' }
+//         ]
+//       },
+//       {
+//         id: 2,
+//         patientName: 'Ana Gomez',
+//         carerName: 'Carlos Ruiz',
+//         loadDate: '2024-10-09',
+//         spreadsheetName: 'Planilla 2',
+//         consulta: 'Consulta especializada',
+//         steps: [
+//           { text: 'Paso 1', isRequired: true, answerType: 1, options: '', response: 'Respuesta 2' }
+//         ]
+//       }
+//     ];
+//     setAuditorias(hardcodedAuditorias);
+//   }, []);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     console.log(auditoriaEdit);
+//     setShowModal(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear.tsx';
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// interface User {
+//   id: number;
+//   userName: string;
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<User[]>([]);
+//   const [asistentes, setAsistentes] = useState<User[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerUsuariosPorRol = async (rol: string, setter: React.Dispatch<React.SetStateAction<User[]>>) => {
+//       try {
+//         const response = await axios.get(`https://emmanuel.somee.com/api/v1/Users/GetByRol/${rol}`, {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setter(response.data);
+//       } catch (error) {
+//         console.error(`Error al cargar los ${rol.toLowerCase()}s:`, error);
+//       }
+//     };
+
+//     obtenerUsuariosPorRol("Paciente", setPacientes);
+//     obtenerUsuariosPorRol("Asistente", setAsistentes);
+//   }, [token]);
+
+//   const handleCreateAuditoriaClick = () => setShowModal(true);
+
+//   const handleCloseModal = () => setShowModal(false);
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <button className="crear-auditoria-button" onClick={handleCreateAuditoriaClick}>
+//         Crear Auditoría
+//       </button>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {auditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td><button onClick={() => handleCreateAuditoriaClick()}>Editar</button></td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//           onClose={handleCloseModal}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaModal/AuditoriaModal.tsx';
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// interface User {
+//   id: number;
+//   userName: string;
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<User[]>([]);
+//   const [asistentes, setAsistentes] = useState<User[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+
+//   // Obtener auditorías de la API
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/SpreadsheetsCompleteds/{id}', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAuditorias(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     console.log(auditoriaEdit);
+//     setShowModal(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// interface User {
+//   id: number;
+//   userName: string;
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<User[]>([]);
+//   const [asistentes, setAsistentes] = useState<User[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [isCreating, setIsCreating] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+
+//   // Obtener auditorías de la API
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/SpreadsheetsCompleteds/{id}', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAuditorias(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleCreateClick = () => {
+//     setAuditoriaEdit(null);
+//     setIsCreating(true);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     if (isCreating) {
+//       // Lógica para guardar una nueva auditoría
+//       console.log("Nueva auditoría creada:", auditoriaEdit);
+//     } else {
+//       console.log("Auditoría actualizada:", auditoriaEdit);
+//     }
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <button onClick={handleCreateClick}>Crear Auditoría</button>
+
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange} pacientes={[]} asistentes={[]}        />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import { User as ModalUser} from "../Usuarios/hooks/User"
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [isCreating, setIsCreating] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+
+//   // Obtener auditorías de la API
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/SpreadsheetsCompleteds', {
+//           headers: { Authorization: `Bearer ${token}`,
+//           contentType: "text/plain" },
+          
+//         });
+//         setAuditorias(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleCreateClick = () => {
+//     setAuditoriaEdit(null);
+//     setIsCreating(true);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     if (isCreating) {
+//       // Lógica para guardar una nueva auditoría
+//       console.log("Nueva auditoría creada:", auditoriaEdit);
+//     } else {
+//       console.log("Auditoría actualizada:", auditoriaEdit);
+//     }
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+
+//       <button onClick={handleCreateClick}>Crear Auditoría</button>
+
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [isCreating, setIsCreating] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         console.log("Pacientes:", response.data); // Verifica los datos obtenidos
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+  
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         console.log("Asistentes:", response.data); // Verifica los datos obtenidos
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+  
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+  
+  
+
+//   // Obtener auditorías de la API
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             ContentType: "text/plain",
+//           },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1
+//           },
+//         });
+//         console.log("Datos de auditorías:", response.data);
+//         // Asegúrate de que response.data sea un array o contenga un array en una propiedad específica
+//         setAuditorias(Array.isArray(response.data) ? response.data : response.data.auditorias || []);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+    
+  
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+  
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleCreateClick = () => {
+//     setAuditoriaEdit(null);
+//     setIsCreating(true);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     if (isCreating) {
+//       console.log("Nueva auditoría creada:", auditoriaEdit);
+//     } else {
+//       console.log("Auditoría actualizada:", auditoriaEdit);
+//     }
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter(auditoria => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={handleCreateClick}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from '../auditoria/AuditoriaCrear/AuditoriaCrear';
+// import "./auditoria.css";
+
+// export interface AuditoriaItem {
+//   pacientId: number;
+//   pacient: string;
+//   carerId: number;
+//   carer: string;
+//   sheetCompletedDate: string;
+//   sheetCompletedId: number;
+//   sheetName: string;
+// }
+
+// const AuditoriaClinicaSimplificada: React.FC = () => {
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAuditorias(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token]);
+
+//   const handleViewClick = (id: number) => {
+//     console.log("Ver auditoría con ID:", id);
+//     // Aquí se puede implementar la lógica para mostrar más detalles
+//   };
+
+//   const handleEditClick = (id: number) => {
+//     console.log("Editar auditoría con ID:", id);
+//     // Aquí se puede abrir el modal para editar
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica Simplificada</h2>
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Ver</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {auditorias.map((auditoria) => (
+//             <tr key={auditoria.sheetCompletedId}>
+//               <td>{auditoria.pacient}</td>
+//               <td>{auditoria.carer}</td>
+//               <td>{new Date(auditoria.sheetCompletedDate).toLocaleDateString()}</td>
+//               <td>{auditoria.sheetName}</td>
+//               <td>
+//                 <button onClick={() => handleViewClick(auditoria.sheetCompletedId)}>Ver</button>
+//               </td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria.sheetCompletedId)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinicaSimplificada;
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import "./auditoria.css";
+
+// export interface AuditoriaItem {
+//   pacientId: number;
+//   pacient: string;
+//   carerId: number;
+//   carer: string;
+//   sheetCompletedDate: string;
+//   sheetCompletedId: number;
+//   sheetName: string;
+// }
+
+// const AuditoriaClinicaSimplificada: React.FC = () => {
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [isCreating, setIsCreating] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAuditorias(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token]);
+
+//   const handleViewClick = (id: number) => {
+//     console.log("Ver auditoría con ID:", id);
+//   };
+
+//   const handleEditClick = (id: number) => {
+//     console.log("Editar auditoría con ID:", id);
+//   };
+
+//   const handleCreateClick = () => {
+//     setIsCreating(true);
+//     setShowModal(true);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const handleSave = (newAuditoria: AuditoriaItem) => {
+//     setAuditorias([...auditorias, newAuditoria]);
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica Simplificada</h2>
+//       <button onClick={handleCreateClick}>Crear Auditoría</button>
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Ver</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {auditorias.map((auditoria) => (
+//             <tr key={auditoria.sheetCompletedId}>
+//               <td>{auditoria.pacient}</td>
+//               <td>{auditoria.carer}</td>
+//               <td>{new Date(auditoria.sheetCompletedDate).toLocaleDateString()}</td>
+//               <td>{auditoria.sheetName}</td>
+//               <td>
+//                 <button onClick={() => handleViewClick(auditoria.sheetCompletedId)}>Ver</button>
+//               </td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria.sheetCompletedId)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//        {showModal && (
+//          <AuditoriaModal
+//            auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//         />
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinicaSimplificada;
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla from './AuditoriaTabla/AuditoriaTabla';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import "./auditoria.css";
+
+// export interface Step {
+//   text: string;
+//   isRequired: boolean;
+//   answerType: number;
+//   options: string;
+//   response: string;
+// }
+
+// export interface Auditoria {
+//   id: number;
+//   patientName: string;
+//   carerName: string;
+//   loadDate: string;
+//   spreadsheetName: string;
+//   consulta: string;
+//   steps: Step[];
+// }
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<Auditoria[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [auditoriaEdit, setAuditoriaEdit] = useState<Auditoria | null>(null);
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [isCreating, setIsCreating] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerPacientes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setPacientes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los pacientes:', error);
+//       }
+//     };
+  
+//     const obtenerAsistentes = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//           headers: { Authorization: `Bearer ${token}` },
+//         });
+//         setAsistentes(response.data);
+//       } catch (error) {
+//         console.error('Error al cargar los asistentes:', error);
+//       }
+//     };
+  
+//     obtenerPacientes();
+//     obtenerAsistentes();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}` },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(Array.isArray(response.data) ? response.data : response.data.auditorias || []);
+//       } catch (error) {
+//         console.error('Error al cargar las auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleEditClick = (auditoria: Auditoria) => {
+//     setAuditoriaEdit(auditoria);
+//     setShowModal(true);
+//   };
+
+//   const handleCreateClick = () => {
+//     setAuditoriaEdit(null);
+//     setIsCreating(true);
+//     setShowModal(true);
+//   };
+
+//   const handleStepResponseChange = (index: number, field: string, value: string) => {
+//     if (!auditoriaEdit) return;
+//     const updatedSteps = [...auditoriaEdit.steps];
+//     updatedSteps[index] = { ...updatedSteps[index], [field]: value };
+//     setAuditoriaEdit({ ...auditoriaEdit, steps: updatedSteps });
+//   };
+
+//   const handleSave = () => {
+//     if (isCreating) {
+//       console.log("Nueva auditoría creada:", auditoriaEdit);
+//     } else {
+//       console.log("Auditoría actualizada:", auditoriaEdit);
+//     }
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const handleCloseModal = () => {
+//     setShowModal(false);
+//     setIsCreating(false);
+//   };
+
+//   const filteredAuditorias = auditorias.filter((auditoria) => {
+//     const matchesPaciente = selectedPaciente ? auditoria.patientName.includes(selectedPaciente.toString()) : true;
+//     const matchesAsistente = selectedAsistente ? auditoria.carerName.includes(selectedAsistente.toString()) : true;
+//     const matchesFecha = selectedFecha ? auditoria.loadDate.startsWith(selectedFecha) : true;
+//     return matchesPaciente && matchesAsistente && matchesFecha;
+//   });
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={handleCreateClick}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {filteredAuditorias.map((auditoria) => (
+//             <tr key={auditoria.id}>
+//               <td>{auditoria.patientName}</td>
+//               <td>{auditoria.carerName}</td>
+//               <td>{new Date(auditoria.loadDate).toLocaleDateString()}</td>
+//               <td>{auditoria.spreadsheetName}</td>
+//               <td>
+//                 <button onClick={() => handleEditClick(auditoria)}>Editar</button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave}
+//           onStepResponseChange={handleStepResponseChange}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla.tsx'; // Importar el tipo de auditoría si es necesario
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//   <AuditoriaModal
+//     auditoria={auditoriaEdit}                // Objeto de auditoría para editar
+//     onClose={handleCloseModal}               // Función para cerrar el modal
+//     onSave={handleSave}                      // Función para guardar cambios
+//     onStepResponseChange={handleStepResponseChange} // Función para manejar cambios en los pasos
+//     pacientes={pacientes}                    // Lista de pacientes
+//     asistentes={asistentes}                  // Lista de asistentes
+//   />
+// )}
+
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   // Usamos el primer elemento de auditorías como ejemplo para auditoriaEdit (ajusta según tus datos)
+//   const auditoriaEdit = auditorias?.[0] ?? null;
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   // Define las funciones para manejar el modal y guardar cambios
+//   const handleCloseModal = () => setShowModal(false);
+
+//   const handleSave = (data: any) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   const handleStepResponseChange = (stepId: number, response: any) => {
+//     console.log(`Cambio en paso ${stepId}:`, response);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit} // Objeto de auditoría para editar
+//           onClose={handleCloseModal} // Función para cerrar el modal
+//           onSave={handleSave} // Función para guardar cambios
+//           onStepResponseChange={handleStepResponseChange} // Función para manejar cambios en los pasos
+//           pacientes={pacientes} // Lista de pacientes
+//           asistentes={asistentes} // Lista de asistentes
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { AuditoriaItem, Auditoria } from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   const auditoriaEdit: Auditoria | null = auditorias.length > 0 ? {
+//     id: auditorias[0].id,
+//     spreadsheetName: auditorias[0].spreadsheetName,
+//     steps: auditorias[0].steps, // Asegúrate de que este campo esté disponible y tenga el tipo correcto
+//     // Añade aquí otras propiedades necesarias según la definición de Auditoria
+//   } : null;
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleCloseModal = () => setShowModal(false);
+
+//   const handleSave = (data: Auditoria) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//     // Aquí puedes agregar lógica para actualizar el estado de auditorias si es necesario
+//   };
+
+//   const handleStepResponseChange = (stepId: number, response: any) => {
+//     console.log(`Cambio en paso ${stepId}:`, response);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit} // Objeto de auditoría para editar
+//           onClose={handleCloseModal} // Función para cerrar el modal
+//           onSave={handleSave} // Función para guardar cambios
+//           onStepResponseChange={handleStepResponseChange} // Función para manejar cambios en los pasos
+//           pacientes={pacientes} // Lista de pacientes
+//           asistentes={asistentes} // Lista de asistentes
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla from './AuditoriaTabla/AuditoriaTabla.tsx';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { AuditoriaItem, Auditoria } from './AuditoriaTabla/AuditoriaTabla.tsx'; // Ensure Auditoria type is imported
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   const auditoriaEdit: Auditoria | null = auditorias?.[0] ?? null; // Ensure auditoriaEdit has the correct type
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleCloseModal = () => setShowModal(false);
+
+//   const handleSave = (data: Auditoria) => { // Change the type to Auditoria
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   const handleStepResponseChange = (stepId: number, response: any) => {
+//     console.log(`Cambio en paso ${stepId}:`, response);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit} // Pass the correct object type
+//           onClose={handleCloseModal} // Close modal function
+//           onSave={handleSave} // Updated to handle the Auditoria type
+//           onStepResponseChange={handleStepResponseChange} // Function for step response changes
+//           pacientes={pacientes} // Patient list
+//           asistentes={asistentes} // Assistant list
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla, { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla.tsx'; // Only import AuditoriaItem
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { Auditoria } from './types'; // Import the Auditoria type from where you defined it
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+//   const auditoriaEdit: Auditoria | null = auditorias?.[0] ?? null;
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+//   const handleCloseModal = () => setShowModal(false);
+
+//   const handleSave = (data: Auditoria) => { 
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//         <AuditoriaModal
+//           auditoria={auditoriaEdit}
+//           onClose={handleCloseModal}
+//           onSave={handleSave} 
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla, { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla'; // Importar solo AuditoriaItem
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { Auditoria } from './types'; // Importar el tipo Auditoria desde donde lo definiste
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const token = localStorage.getItem('token');
+
+
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: 1,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//   };
+
+
+//   const handleSave = (data: Auditoria) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       {showModal && (
+//       <AuditoriaModal
+//           onClose={() => setShowModal(false)}
+//           onSave={handleSave}
+//           pacientes={pacientes}
+//           asistentes={asistentes} auditoria={null} onStepResponseChange={function (): void {
+//             throw new Error('Function not implemented.');
+//           } }    />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla, { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { Auditoria } from './types';
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [currentPage, setCurrentPage] = useState<number>(1); // Página actual
+//   const [hasMore, setHasMore] = useState<boolean>(true); // Para saber si hay más auditorías
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async () => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: currentPage,
+//           },
+//         });
+//         setAuditorias(response.data.items || []);
+//         setHasMore(response.data.items.length === 5); // Si se reciben 5 auditorías, hay más
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//       }
+//     };
+
+//     obtenerAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha, currentPage]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleSave = (data: Auditoria) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   const handleNextPage = () => {
+//     if (hasMore) {
+//       setCurrentPage((prev) => prev + 1);
+//     }
+//   };
+
+//   const handlePreviousPage = () => {
+//     if (currentPage > 1) {
+//       setCurrentPage((prev) => prev - 1);
+//     }
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       <div className="pagination">
+//         <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+//           Anterior
+//         </button>
+//         <button onClick={handleNextPage} disabled={!hasMore}>
+//           Siguiente
+//         </button>
+//       </div>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           onClose={() => setShowModal(false)}
+//           onSave={handleSave}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//           auditoria={null}
+//           onStepResponseChange={function (): void {
+//             throw new Error('Function not implemented.');
+//           }}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla, { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { Auditoria } from './types';
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [nextAuditorias, setNextAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [prevAuditorias, setPrevAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [currentPage, setCurrentPage] = useState<number>(1); // Página actual
+//   const [hasMore, setHasMore] = useState<boolean>(true); // Para saber si hay más auditorías
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   useEffect(() => {
+//     const obtenerAuditorias = async (page: number) => {
+//       try {
+//         const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//           headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//           params: {
+//             pacienteId: selectedPaciente,
+//             asistenteId: selectedAsistente,
+//             fecha: selectedFecha,
+//             pageSize: 5,
+//             pageNumber: page,
+//           },
+//         });
+//         return response.data.items || [];
+//       } catch (error) {
+//         console.error('Error al cargar auditorías:', error);
+//         return [];
+//       }
+//     };
+
+//     const cargarAuditorias = async () => {
+//       const currentAuditorias = await obtenerAuditorias(currentPage);
+//       setAuditorias(currentAuditorias);
+      
+//       if (hasMore) {
+//         const nextPageAuditorias = await obtenerAuditorias(currentPage + 1);
+//         setNextAuditorias(nextPageAuditorias);
+//       }
+
+//       if (currentPage > 1) {
+//         const prevPageAuditorias = await obtenerAuditorias(currentPage - 1);
+//         setPrevAuditorias(prevPageAuditorias);
+//       }
+      
+//       setHasMore(currentAuditorias.length === 5); // Si se reciben 5 auditorías, hay más
+//     };
+
+//     cargarAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha, currentPage]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//     setCurrentPage(1); // Reiniciar a la página 1
+//   };
+
+//   const handleSave = (data: Auditoria) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   const handleNextPage = () => {
+//     if (hasMore) {
+//       setCurrentPage((prev) => prev + 1);
+//     }
+//   };
+
+//   const handlePreviousPage = () => {
+//     if (currentPage > 1) {
+//       setCurrentPage((prev) => prev - 1);
+//     }
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       <div className="pagination">
+//         <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+//           Anterior
+//         </button>
+//         <button onClick={handleNextPage} disabled={!hasMore}>
+//           Siguiente
+//         </button>
+//       </div>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           onClose={() => setShowModal(false)}
+//           onSave={handleSave}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//           auditoria={null}
+//           onStepResponseChange={function (): void {
+//             throw new Error('Function not implemented.');
+//           }}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import AuditoriaModal from './AuditoriaCrear/AuditoriaCrear';
+// import AuditoriaTabla, { AuditoriaItem } from './AuditoriaTabla/AuditoriaTabla';
+// import { User as ModalUser } from "../Usuarios/hooks/User";
+// import { Auditoria } from './types';
+// import "./auditoria.css";
+
+// const AuditoriaClinica: React.FC = () => {
+//   const [pacientes, setPacientes] = useState<ModalUser[]>([]);
+//   const [asistentes, setAsistentes] = useState<ModalUser[]>([]);
+//   const [auditorias, setAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [nextAuditorias, setNextAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [previousAuditorias, setPreviousAuditorias] = useState<AuditoriaItem[]>([]);
+//   const [selectedPaciente, setSelectedPaciente] = useState<number | null>(null);
+//   const [selectedAsistente, setSelectedAsistente] = useState<number | null>(null);
+//   const [selectedFecha, setSelectedFecha] = useState<string>('');
+//   const [showModal, setShowModal] = useState<boolean>(false);
+//   const [currentPage, setCurrentPage] = useState<number>(1);
+//   const [hasMore, setHasMore] = useState<boolean>(true);
+//   const token = localStorage.getItem('token');
+
+//   useEffect(() => {
+//     const obtenerUsuarios = async () => {
+//       try {
+//         const [pacientesResponse, asistentesResponse] = await Promise.all([
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Paciente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//           axios.get('https://emmanuel.somee.com/api/v1/Users/GetByRol/Asistente', {
+//             headers: { Authorization: `Bearer ${token}` },
+//           }),
+//         ]);
+//         setPacientes(pacientesResponse.data);
+//         setAsistentes(asistentesResponse.data);
+//       } catch (error) {
+//         console.error('Error al cargar usuarios:', error);
+//       }
+//     };
+
+//     obtenerUsuarios();
+//   }, [token]);
+
+//   const obtenerAuditorias = async (page: number) => {
+//     try {
+//       const response = await axios.get('https://emmanuel.somee.com/api/v1/MedicalRecords/GetByPacientDate', {
+//         headers: { Authorization: `Bearer ${token}`, ContentType: 'text/plain' },
+//         params: {
+//           pacienteId: selectedPaciente,
+//           asistenteId: selectedAsistente,
+//           fecha: selectedFecha,
+//           pageSize: 5,
+//           pageNumber: page,
+//         },
+//       });
+//       return response.data.items || [];
+//     } catch (error) {
+//       console.error('Error al cargar auditorías:', error);
+//       return [];
+//     }
+//   };
+
+//   useEffect(() => {
+//     const fetchAuditorias = async () => {
+//       const current = await obtenerAuditorias(currentPage);
+//       setAuditorias(current);
+      
+//       // Cargar la siguiente página
+//       const next = await obtenerAuditorias(currentPage + 1);
+//       setNextAuditorias(next);
+
+//       // Cargar la página anterior si no es la primera
+//       if (currentPage > 1) {
+//         const previous = await obtenerAuditorias(currentPage - 1);
+//         setPreviousAuditorias(previous);
+//       }
+      
+//       setHasMore(next.length === 5); // Si se reciben 5 auditorías, hay más
+//     };
+
+//     fetchAuditorias();
+//   }, [token, selectedPaciente, selectedAsistente, selectedFecha, currentPage]);
+
+//   const handlePacienteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedPaciente(Number(e.target.value));
+//     setCurrentPage(1);
+//   };
+
+//   const handleAsistenteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setSelectedAsistente(Number(e.target.value));
+//     setCurrentPage(1);
+//   };
+
+//   const handleFechaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setSelectedFecha(e.target.value);
+//     setCurrentPage(1);
+//   };
+
+//   const handleSave = (data: Auditoria) => {
+//     console.log('Guardando auditoría:', data);
+//     setShowModal(false);
+//   };
+
+//   const handleNextPage = () => {
+//     if (hasMore) {
+//       setCurrentPage((prev) => prev + 1);
+//     }
+//   };
+
+//   const handlePreviousPage = () => {
+//     if (currentPage > 1) {
+//       setCurrentPage((prev) => prev - 1);
+//     }
+//   };
+
+//   return (
+//     <div className="auditoria-clinica">
+//       <h2>Auditoría Clínica</h2>
+//       <button onClick={() => setShowModal(true)}>Crear Auditoría</button>
+//       <div className="filtros">
+//         <div className="form-group">
+//           <label>Seleccione Paciente</label>
+//           <select value={selectedPaciente || ''} onChange={handlePacienteChange}>
+//             <option value="">Todos los pacientes</option>
+//             {pacientes.map((paciente) => (
+//               <option key={paciente.id} value={paciente.id}>
+//                 {paciente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Asistente</label>
+//           <select value={selectedAsistente || ''} onChange={handleAsistenteChange}>
+//             <option value="">Todos los asistentes</option>
+//             {asistentes.map((asistente) => (
+//               <option key={asistente.id} value={asistente.id}>
+//                 {asistente.userName}
+//               </option>
+//             ))}
+//           </select>
+//         </div>
+//         <div className="form-group">
+//           <label>Seleccione Fecha</label>
+//           <input type="date" value={selectedFecha} onChange={handleFechaChange} />
+//         </div>
+//       </div>
+
+//       <AuditoriaTabla auditorias={auditorias} />
+
+//       <div className="pagination">
+//         <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+//           Anterior
+//         </button>
+//         <button onClick={handleNextPage} disabled={!hasMore}>
+//           Siguiente
+//         </button>
+//       </div>
+
+//       {showModal && (
+//         <AuditoriaModal
+//           onClose={() => setShowModal(false)}
+//           onSave={handleSave}
+//           pacientes={pacientes}
+//           asistentes={asistentes}
+//           auditoria={null}
+//           onStepResponseChange={function (): void {
+//             throw new Error('Function not implemented.');
+//           }}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AuditoriaClinica;
+

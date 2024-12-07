@@ -1,0 +1,51 @@
+.dashboard {
+  height: 50%;
+  width: 100%;
+}
+
+.dashboard-content {
+  transition: margin-left 0.3s;
+  height: 50%;
+  width: 100%;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.fade-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.fade-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-exit-active {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+
+/* dashboard.css */
+
+.sidebar-enter {
+  transform: translateX(-100%); /* Comienza fuera de la pantalla */
+  opacity: 0;
+}
+.sidebar-enter-active {
+  transform: translateX(0); /* Desliza hacia la vista */
+  opacity: 1;
+  transition: transform 300ms ease, opacity 300ms ease; /* Animación */
+}
+.sidebar-exit {
+  transform: translateX(0);
+  opacity: 1;
+}
+.sidebar-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 300ms ease, opacity 300ms ease;
+}

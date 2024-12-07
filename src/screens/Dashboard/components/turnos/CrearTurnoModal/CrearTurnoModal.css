@@ -1,0 +1,163 @@
+/* .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 30rem;
+    height: 50rem0;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group select,
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-actions button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+   */
+
+
+
+
+
+
+
+
+
+
+
+
+   .moda-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto; /* Permite el scroll si el modal es muy alto */
+    z-index: 100;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90vw;
+    width: 30rem;
+    max-height: 90vh;
+    overflow-y: auto; /* Permite el scroll */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Asegura que los elementos dentro del modal respeten su contexto */
+    z-index: 150; /* Asegura que el modal tenga prioridad de apilamiento */
+  }
+  
+  .dropdown {
+    position: relative; /* Mantiene el dropdown dentro del contexto del modal */
+    z-index: 5; /* El dropdown debe tener un z-index menor que el modal para no desbordarse */
+  }
+  
+  .dropdown-menu {
+    position: absolute; /* Asegura que el menú se despliegue correctamente */
+    z-index: 15; /* Se asegura de que el menú desplegable esté por encima del contenido del modal */
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Asegura que el menú ocupe el ancho del contenedor */
+  }
+  
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group select,
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .modal-actions button {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+
+
+
+
+  .turn-btn {
+    background-color: var(--fucsia-claro); /* Color principal */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .turn-btn:hover {
+    background-color: var(--fucsia-oscuro);
+  }

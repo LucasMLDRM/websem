@@ -1,0 +1,23 @@
+.search-bar {
+  display: flex;
+  justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    max-width: 20rem; /* Tamaño máximo para la barra de búsqueda */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #FC308C;
+    border-radius: 2rem 0 2rem 0;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    background-color: #ffffff00;
+    color: #FC308C;
+  }
+  
+  .search-bar input::placeholder {
+    color: #FC308C;
+  }
+  

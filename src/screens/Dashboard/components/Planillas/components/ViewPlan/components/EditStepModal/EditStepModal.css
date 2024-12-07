@@ -1,0 +1,693 @@
+/* 
+.edit-step-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .edit-step-modal {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    padding: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    margin-top: -8.5rem;
+    font-size: 20px;
+    color: var(--fucsia);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: var(--fucsia);
+    cursor: pointer;
+    position: relative;
+    margin-left: 15rem;
+    margin-right: -0.8rem;
+    margin-top: -8.5rem;
+  }
+
+  .close-button:hover{
+    color: var(--fucsia-oscuro);
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--azul-oscuro);
+  }
+
+  .consigna{
+    background-color: rgba(116, 227, 255, 0);
+    color: var(--fucsia);
+  }
+  
+  .modal-content input[type="text"],
+  .modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  
+
+
+
+
+  .options-list {
+    max-height: 60px; 
+    overflow-y: auto;  
+    border: 1px solid #ccc; 
+    padding: 10px; 
+  }
+  
+  .option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px; 
+  }
+  
+  .option-item button {
+    background-color: transparent;
+    border: none;
+    color: var(--fucsia);
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+
+
+
+
+
+
+  .remove-option-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .add-option {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .add-option input {
+    flex: 1;
+  }
+  
+  .add-option button {
+    background-color: var(--fucsia);
+    border: none;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+  }
+  
+  .add-option button:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+  
+  .obligatory-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    bottom: 0rem;
+  }
+  
+  .save-button-step {
+    background-color: var(--celeste-real);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 1rem;
+    margin-left: 0;
+    margin-bottom: -3rem;
+  }
+  
+  .save-button-step:hover {
+    background-color: var(--celeste-oscuro);
+  } */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+  .edit-step-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .edit-step-modal {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; 
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--fucsia);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: var(--fucsia);
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: var(--fucsia-oscuro);
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--azul-oscuro);
+  }
+  
+  .consigna {
+    background-color: rgba(116, 227, 255, 0);
+    color: var(--fucsia);
+  }
+  
+  .modal-content input[type="text"],
+  .modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .options-list {
+    max-height: 60px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 1rem; 
+  }
+  
+  .option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .option-item button {
+    background-color: transparent;
+    border: none;
+    color: var(--fucsia);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .remove-option-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .add-option {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .add-option input {
+    flex: 1;
+  }
+  
+  .add-option button {
+    background-color: var(--fucsia);
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+  }
+  
+  .add-option button:hover {
+    background-color: var(--fucsia-oscuro);
+  }
+  
+  .obligatory-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem; 
+  }
+  
+  .save-button-step {
+    background-color: var(--celeste-real);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .save-button-step:hover {
+    background-color: var(--celeste-oscuro);
+  }
+   */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+   .edit-step-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-step-modal {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--fucsia);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: var(--fucsia);
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.close-button:hover {
+    color: var(--fucsia-oscuro);
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--azul-oscuro);
+}
+
+.consigna {
+    background-color: rgba(116, 227, 255, 0);
+    color: var(--fucsia);
+}
+
+.modal-content input[type="text"],
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.options-list {
+    max-height: 60px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.option-item button {
+    background-color: transparent;
+    border: none;
+    color: var(--fucsia);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.remove-option-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.add-option {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.add-option input {
+    flex: 1;
+}
+
+.add-option button {
+    background-color: var(--fucsia);
+    border: none;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+.add-option button:hover {
+    background-color: var(--fucsia-oscuro);
+}
+
+.obligatory-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.save-button-step {
+    background-color: var(--celeste-real);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-button-step:hover {
+    background-color: var(--celeste-oscuro);
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.edit-step-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-step-modal {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    padding: 20px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+  
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--fucsia);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: var(--fucsia);
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close-button:hover {
+    color: var(--fucsia-oscuro);
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--azul-oscuro);
+}
+
+.consigna {
+    background-color: rgba(116, 227, 255, 0);
+    color: var(--fucsia);
+}
+
+.modal-content input[type="text"],
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.options-list {
+    max-height: 60px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.option-item button {
+    background-color: transparent;
+    border: none;
+    color: var(--fucsia);
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.remove-option-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.add-option {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.add-option input {
+    flex: 1;
+}
+
+.add-option button {
+    background-color: var(--fucsia);
+    border: none;
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+}
+
+.add-option button:hover {
+    background-color: var(--fucsia-oscuro);
+}
+
+.obligatory-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.save-button-step {
+    background-color: var(--celeste-real);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.save-button-step:hover {
+    background-color: var(--celeste-oscuro);
+}

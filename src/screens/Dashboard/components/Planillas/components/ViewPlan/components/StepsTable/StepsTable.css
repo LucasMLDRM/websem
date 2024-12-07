@@ -1,0 +1,243 @@
+/* .edit-step-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 90%;
+  }
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .multiple-opciones {
+    margin-top: 10px;
+  }
+  
+  .opcion-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .opcion-item input {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+
+  .tablets{
+    margin-bottom: 1.5rem;
+  }
+
+
+.add-step-button {
+    margin-top: 2rem;
+    padding: 5px 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--celeste-real);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+  }
+  
+  .add-step-button:hover {
+    background-color: var(--celeste-oscuro);
+  }
+ 
+
+  .ver-btn{
+    background-color: #ffffff00;
+    border: none;
+    color: var(--fucsia);
+  } */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* .edit-step-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0);
+    width: 100%;
+    height: 60%; 
+} */
+  
+  .modal-content {
+    background-color: #ffffff00;
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    width: 400px;
+    max-width: 90%;
+    max-height: 50%; /* Limitar la altura máxima */
+}
+  
+  .modal-content h2 {
+    margin-top: 0;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .multiple-opciones {
+    margin-top: 10px;
+  }
+  
+  .opcion-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .opcion-item input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .tablets {
+    margin-bottom: 1.5rem;
+  }
+  
+  .add-step-button {
+    margin-top: 2rem;
+    padding: 5px 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--celeste-real);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+  }
+  
+  .add-step-button:hover {
+    background-color: var(--celeste-oscuro);
+  }
+  
+  .ver-btn {
+    background-color: #ffffff00;
+    border: none;
+    color: var(--fucsia);
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tablets {
+    width: 100%;
+    border-collapse: collapse; /* Evitar el espacio entre bordes de las celdas */
+  }
+  
+  .tablets th,
+  .tablets td {
+    padding: 10px 15px; /* Espaciado interno para las celdas */
+    text-align: left;
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    overflow: hidden; /* Ocultar el desbordamiento del contenido */
+    text-overflow: ellipsis; /* Añadir puntos suspensivos (...) si el texto es demasiado largo */
+    max-width: 200px; /* Ancho máximo para las celdas */
+  }
+  
+  /* Específicamente para columnas individuales, puedes ajustar el ancho así: */
+  .tablets th:nth-child(2),
+  .tablets td:nth-child(2) {
+    max-width: 250px; /* Ancho máximo específico para la segunda columna */
+  }
+  
+  .tablets th,
+  .tablets td {
+    border-bottom: 1px solid #ddd; /* Separación entre filas */
+  }
+  
+  .tablets th:first-child,
+  .tablets td:first-child {
+    padding-left: 20px; /* Más espacio en el lado izquierdo de la primera columna */
+  }
+  
+  .tablets th:last-child,
+  .tablets td:last-child {
+    padding-right: 20px; /* Más espacio en el lado derecho de la última columna */
+  }
+  
+
+
+  .spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: var(--celeste-real);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .cards-container.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Ajusta la altura si es necesario */
+  }
+  
