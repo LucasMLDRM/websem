@@ -1,0 +1,56 @@
+Prioridad
+    mendarle a emma lo de los steps id queda feo
+    mejorar estilos de la web
+
+
+
+EditUser{
+    mejorar responsive
+    redondear inputs
+    mejorar select
+    mejorar titulo
+}
+
+CreateUser{
+    boton de retroceso
+    centrarlo si esta mal
+    revisar responsive
+}
+
+Profile{
+    meter flecha dentro del container
+}
+
+planillas{
+    si se puede, que no se vean
+    los espacios sin info
+
+    quitar o mejorar el boton de editar
+
+    mejorar responsive
+
+    cuando no encuentre nada mantenga su tamaño
+}
+
+ViewPlan{
+    boton para volver atras
+    inputs blancos y redondeados
+    revisar responsive
+}
+
+TableStep{
+    mejorar boton ver o editar
+    
+    cuando un estep se inhabilita sale de la lista
+    cuando se habilita vuelve quizas al orden donde estaba
+    (hacer esto una vez tengamos las planillas en base)
+}
+
+EditStepModal{
+    añadir opcion input fondo blanco
+    la consigna debe ser obligatoria
+}
+
+Home{
+    mejorar responsive
+}
