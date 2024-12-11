@@ -1,6 +1,6 @@
 .view-plan {
     padding: 20px;
-    border: 1px solid #ccc;
+
     border-radius: 8px;
     background-color: #f9f9f9;
   }
@@ -12,9 +12,29 @@
     color: rgb(255, 255, 255);
   }
   
+
+  .miti{
+    text-align: left;
+  }
+
+
   .plan-tex{
     color: #fff;
+    text-align: left;
   }
+
+  .planitx{
+    font-weight:100;
+    text-align: left;
+    margin: 0;
+
+  }
+
+
+  .descp{
+    font-weight:900;
+  }
+
 
   .planilla-field {
     margin-bottom: 10px;
@@ -29,7 +49,7 @@
     border-radius: 1rem;
     background-color: #ffffff;
     color: rgb(255, 255, 255);
-    border: 1px solid rgb(202, 202, 202);
+   
   }
 
 /* CSS para el select */
@@ -38,7 +58,7 @@
   -moz-appearance: none;   
   appearance: none;         
   padding: 8px;
-  border: 1px solid #ccc;
+  
   border-radius: 2rem; 
   background-color: white;
   background-image: url('http://www.w3.org/2000/svg');
@@ -58,7 +78,7 @@
   .step-item {
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #ddd;
+  
     border-radius: 8px;
     background-color: #fff;
   }

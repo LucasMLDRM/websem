@@ -143,45 +143,43 @@
 
 
 
-
+/* 
 .planillas-container {
-  position: relative; /* Permite posicionar el contenido en relación a su contenedor */
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   top: 0;
-  margin-top: 0rem; /* Ajusta la separación desde el encabezado */
-  scale: 1; /* Escala el tamaño del componente */
-  min-height: 90vh; /* Ajusta la altura mínima al 90% del viewport */
+  margin-top: 0rem;
+  scale: 1;
+  min-height: 90vh;
   width: 100%;
 }
 
 .planillas-table {
-  width: 90%; /* Asegura que no ocupe todo el ancho */
-  max-width: 1200px; /* Limita el ancho máximo */
+  width: 90%;
+  max-width: 1200px;
   border-collapse: collapse;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
-  overflow: hidden; /* Asegura que el contenido no sobresalga */
+  overflow: hidden;
   padding: 1rem;
-  margin-bottom: 2rem; /* Espacio debajo de la tabla */
+  margin-bottom: 2rem;
 }
 
-/* Encabezado de la tabla */
 .planillas-table thead {
   background-color: var(--fucsia);
   color: white;
   text-align: left;
   font-weight: bold;
-  border-radius: 12px 12px 0 0; /* Esquinas superiores redondeadas */
+  border-radius: 12px 12px 0 0;
 }
 
 .planillas-table th {
   padding: 1rem;
 }
 
-/* Estilos de las celdas */
 .planillas-table td {
   padding: 0.9rem;
   text-align: left;
@@ -190,7 +188,6 @@
   color: #333;
 }
 
-/* Contenedor para el botón de crear y la paginación */
 .pagination-and-create-btn-container {
   display: flex;
   justify-content: space-between;
@@ -216,7 +213,6 @@
   box-shadow: 0px 2px 6px #fa539e4f;
 }
 
-/* Paginación */
 .pagination {
   display: flex;
   gap: 10px;
@@ -238,4 +234,88 @@
 .pagination-button.active {
   background-color: var(--fucsia);
   color: white;
+} */
+
+
+
+
+
+
+
+
+.planillas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo el contenido horizontalmente */
+  justify-content: flex-start;
+  margin-top: 0rem;
+  min-height: 90vh;
+  width: 100%;
+}
+
+.planillas-table-container {
+  display: flex;
+  justify-content: center; /* Centra la tabla horizontalmente */
+  width: 100%;
+}
+
+.planillas-table {
+  width: 90%;
+  max-width: 1200px;
+  border-collapse: collapse;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  overflow: hidden;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.planillas-table th {
+  padding: 1rem;
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+
+.pagination-and-create-btn-container {
+  display: flex;
+  justify-content: space-between; /* Distribuye los elementos a los extremos */
+  align-items: center;
+  width: 90%; /* Asegura que el contenedor tenga un ancho consistente */
+  max-width: 1200px;
+  margin-top: auto;
+}
+
+.create-planilla-button {
+  display: flex;
+  justify-content: flex-start; /* Alinea el botón a la izquierda */
+  flex: 1; /* Permite que tome el espacio restante */
+
+}
+
+.create-btn-plan{
+  border-radius: 1rem;
+  background: linear-gradient(to left , #fa539e, #bf256a);
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end; /* Alinea la paginación a la derecha */
+  flex: 1; /* Permite que tome el espacio restante */
+}
+
+.pagination-button{
+  border-radius: 1rem;
+  background-color: rgba(240, 248, 255, 0);
+  border: solid 1px var(--fucsia);
+}
+
+.pagination-button.active{
+  background-color: var(--fucsia);
+}
+
+
+
+.edit-button{
+  color: var(--fucsia);
+  font-size: large;
 }

@@ -211,7 +211,7 @@ import EditarTurnoModal from './EditarTurnoModal/EditarTurnoModal';
 import axios from 'axios';
 import './turnos.css';
 import { Turno } from './types';
-import { BiSpreadsheet } from "react-icons/bi"; 
+import { BsCalendar2Week } from "react-icons/bs"; 
 
 const Turnos: React.FC = () => {
   const [turnos, setTurnos] = useState<Turno[]>([]);
@@ -357,7 +357,7 @@ const Turnos: React.FC = () => {
     <div className="turnos-container">
       <div className="turnos-head">
 
-      <h1 className='turn-title'><BiSpreadsheet/>Turnos Asignados</h1>
+      <h1 className='turn-title'><BsCalendar2Week/>Turnos Asignados</h1>
       <div className="busqueda-container">
 
 

@@ -675,19 +675,21 @@
 .modal-footer {
     display: flex;
     justify-content: flex-end;
-    margin-top: auto;
+    margin-top: 1rem;
 }
 
 .save-button-step {
-    background-color: var(--celeste-real);
+    background: linear-gradient(to left , #fa539e, #bf256a);
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
     font-size: 14px;
+    transition: all 0.3s ease-in-out;
 }
 
 .save-button-step:hover {
-    background-color: var(--celeste-oscuro);
-}
+    background: linear-gradient(to left , #b83f75, #86194a);
+    transition: all 0.3s ease-in-out;
+  }

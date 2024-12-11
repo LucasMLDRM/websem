@@ -1,11 +1,31 @@
 .dashboard {
-  height: 50%;
+  height: 100%;
   width: 100%;
 }
 
+.dashboard-header {
+  position: relative;
+}
+
+.super-admin-badge {
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  background-color: #4caf4f00; /* Color del fondo */
+  color: white; /* Color del texto */
+  padding: 5px 15px; /* Espaciado interno */
+  border-radius: 20px 0px 20px 0px; /* Bordes redondeados */
+  border: solid 1px#FC308C;
+  font-size: 14px; /* Tamaño de la fuente */
+  font-weight: bold; /* Negrita */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+  z-index: 10; /* Asegurarse de que esté encima del contenido */
+}
+
+
 .dashboard-content {
   transition: margin-left 0.3s;
-  height: 50%;
+  height: 100%;
   width: 100%;
 }
 

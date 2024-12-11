@@ -32,8 +32,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased; 
   -moz-osx-font-smoothing: grayscale; 
-  min-width: 320px;
-  min-height: 100vh;
+
   padding: 0;
   /* background-image: url('./assets/pattern.png');
   background-repeat: repeat;

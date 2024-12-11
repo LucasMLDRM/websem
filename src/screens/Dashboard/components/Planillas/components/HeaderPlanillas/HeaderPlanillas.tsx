@@ -64,7 +64,8 @@
 
 import React from 'react';
 import './HeaderPlanillas.css'; // Asegúrate de crear un archivo CSS para los estilos del HeaderPlanillas
-import { FaRegUser } from "react-icons/fa6"; 
+
+import { BsLayoutTextSidebar } from 'react-icons/bs'
 
 interface HeaderPlanillasProps {
   searchTerm: string;
@@ -75,7 +76,7 @@ const HeaderPlanillas: React.FC<HeaderPlanillasProps> = ({ searchTerm, onSearchC
   return (
     <div className="header-planillas-container">
       <h1 className="header-planillas-title">
-      <FaRegUser/>
+      <BsLayoutTextSidebar/>
         Planillas
       </h1>
       

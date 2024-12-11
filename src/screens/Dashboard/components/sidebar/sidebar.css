@@ -136,7 +136,7 @@
 
 /* Sidebar styling */
 .sidebar {
-  width: 250px;
+  width: 270px;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -154,16 +154,16 @@
 }
 
 .sidebar.closed {
-  width: 60px;
+  width: 70px;
   overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 150px;
+    width: 200px;
   }
   .sidebar.closed {
-    width: 45px;
+    width: 60px;
   }
 }
 
@@ -336,7 +336,9 @@
 .lista-side {
   /* margin-top: -25rem; ESTE ES EL ORIGINAL SUBE O BAJA LA LISTA DE LA
   SIDEBAR*/
-  margin-top: -23rem;
+  margin-top: -18rem;
+  text-wrap: nowrap;
+
 }
 
 

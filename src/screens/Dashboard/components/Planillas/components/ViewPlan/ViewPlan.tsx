@@ -761,6 +761,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StepsTable from '../ViewPlan/components/StepsTable/StepsTable'; // Asegúrate de que la ruta sea correcta
 import { Step } from '../../types'; // Importa el tipo Step
+import './ViewPlan.css'
+import { BsLayoutTextSidebar } from "react-icons/bs";
 
 const ViewPlan: React.FC = () => {
   const [steps, setSteps] = useState<Step[]>([]);
@@ -813,8 +815,8 @@ const ViewPlan: React.FC = () => {
     <div>
       {planilla && (
         <div>
-          <h1 className='plan-tex'>{planilla.name}</h1>
-          <p className='plan-tex'>{planilla.description}</p>
+          <h1 className='miti'><strong className='planitx'><BsLayoutTextSidebar/> Planilla:</strong> {planilla.name}</h1> <br></br>
+          <p className='plan-tex'> <span className='descp'>Descripción de la Planilla</span> <br></br>{planilla.description}</p>
           <StepsTable initialSteps={steps} onStepsChange={setSteps} />
         </div>
       )}
