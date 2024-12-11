@@ -36,7 +36,7 @@
   }
   
   input:checked + .slider {
-    background: var(--celeste-real);
+    background: var(--fucsia);
   }
   
   input:checked + .slider:before {
