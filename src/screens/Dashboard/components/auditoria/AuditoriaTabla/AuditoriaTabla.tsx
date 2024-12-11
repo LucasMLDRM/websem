@@ -1582,6 +1582,267 @@
 
 
 
+// import React, { useState } from 'react';
+// import EditarAuditoriaModal from '../EditarAuditoriaModal/EditarAuditoriaModal';
+// import './AuditoriaTabla.css';
+// import { User } from '../../Usuarios/hooks/User';
+
+// export interface AuditoriaItem {
+//   pacientId: number;
+//   pacient: string;
+//   carerId: number;
+//   carer: string;
+//   sheetCompletedDate: string;
+//   sheetCompletedId: number;
+//   sheetName: string;
+// }
+
+// interface AuditoriaTablaProps {
+//   auditorias: AuditoriaItem[];
+//   pacientes: User[];
+//   asistentes: User[];
+//   onViewDetails?: (id: number, carerName: string, patientName: string) => void; // Nueva prop
+// }
+
+// const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetails }) => {
+//   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+//   const [selectedId, setSelectedId] = useState<number | null>(null);
+//   const [isViewOnly, setIsViewOnly] = useState<boolean>(false);
+//   const [loadingId, setLoadingId] = useState<number | null>(null);
+//   const [loadingEditId, setLoadingEditId] = useState<number | null>(null);
+
+//   const handleView = (id: number, carer: string, pacient: string) => {
+//     if (onViewDetails) {
+//       onViewDetails(id, carer, pacient); // Llamar a la prop `onViewDetails`
+//     } else {
+//       // Comportamiento por defecto si `onViewDetails` no está definida
+//       setLoadingId(id);
+//       setIsViewOnly(true); // Activar modo visualización
+//       setSelectedId(id);
+//       setTimeout(() => {
+//         setLoadingId(null);
+//         setModalOpen(true);
+//       }, 1000); // Simulamos un tiempo de carga de 1 segundo
+//     }
+//   };
+
+//   const handleEdit = (id: number, _carer: string, _pacient: string) => {
+//     setLoadingEditId(id);
+//     setIsViewOnly(false); // Desactivar modo visualización (permitir edición)
+//     setSelectedId(id);
+//     setTimeout(() => {
+//       setLoadingEditId(null);
+//       setModalOpen(true);
+//     }, 1000);
+//   };
+
+//   const handleCloseModal = () => {
+//     setModalOpen(false);
+//     setSelectedId(null);
+//   };
+
+//   return (
+//     <>
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Ver</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {auditorias.map((auditoria) => (
+//             <tr key={auditoria.sheetCompletedId}>
+//               <td>{auditoria.pacient}</td>
+//               <td>{auditoria.carer}</td>
+//               <td>{new Date(auditoria.sheetCompletedDate).toLocaleDateString()}</td>
+//               <td>{auditoria.sheetName}</td>
+//               <td>
+//                 <button
+//                   onClick={() => handleView(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}
+//                 >
+//                   {loadingId === auditoria.sheetCompletedId ? (
+//                     <span className="spinner"></span>
+//                   ) : (
+//                     'Ver'
+//                   )}
+//                 </button>
+//               </td>
+//               <td>
+//                 <button onClick={() => handleEdit(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}>
+//                   {loadingEditId === auditoria.sheetCompletedId ? (
+//                     <span className="spinner"></span>
+//                   ) : (
+//                     'Editar'
+//                   )}
+//                 </button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {/* {isModalOpen && selectedId !== null && (
+//         <EditarAuditoriaModal
+//           id={selectedId}
+//           onClose={handleCloseModal}
+//           isViewOnly={isViewOnly} // Pasar modo visualización según el botón clicado
+//           carerName={auditoria.carer} patientName={auditoria.pacient}        />
+//       )} */}
+
+// {isModalOpen && selectedId !== null && (
+//   // Aquí pasamos los datos correctos de la auditoría seleccionada
+//   <EditarAuditoriaModal
+//     id={selectedId}
+//     onClose={handleCloseModal}
+//     isViewOnly={isViewOnly}
+//     carerName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.carer || ""}
+//     patientName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.pacient || ""}
+//   />
+// )}
+
+//     </>
+//   );
+// };
+
+// export default AuditoriaTabla;
+
+
+
+
+
+// import React, { useState } from 'react';
+// import EditarAuditoriaModal from '../EditarAuditoriaModal/EditarAuditoriaModal';
+// import './AuditoriaTabla.css';
+// import { User } from '../../Usuarios/hooks/User';
+
+// export interface AuditoriaItem {
+//   pacientId: number;
+//   pacient: string;
+//   carerId: number;
+//   carer: string;
+//   sheetCompletedDate: string;
+//   sheetCompletedId: number;
+//   sheetName: string;
+// }
+
+// interface AuditoriaTablaProps {
+//   auditorias: AuditoriaItem[];
+//   pacientes: User[];
+//   asistentes: User[];
+//   onViewDetails?: (id: number, carerName: string, patientName: string) => void; // Prop existente
+//   isLoading?: boolean; // Nueva prop para mostrar estado global de carga
+//   loadingId?: number | null; // Nueva prop para identificar qué auditoría está cargando
+// }
+
+
+// const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetails }) => {
+//   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+//   const [selectedId, setSelectedId] = useState<number | null>(null);
+//   const [isViewOnly, setIsViewOnly] = useState<boolean>(false);
+//   const [loadingId, setLoadingId] = useState<number | null>(null);
+//   const [loadingEditId, setLoadingEditId] = useState<number | null>(null);
+
+//   const handleView = (id: number, carer: string, pacient: string) => {
+//     if (onViewDetails) {
+//       onViewDetails(id, carer, pacient); // Llamar a la prop `onViewDetails`
+//     } else {
+//       setLoadingId(id);
+//       setIsViewOnly(true); // Activar modo visualización
+//       setSelectedId(id);
+//       setTimeout(() => {
+//         setLoadingId(null);
+//         setModalOpen(true);
+//       }, 1000); // Simulamos un tiempo de carga de 1 segundo
+//     }
+//   };
+
+//   const handleEdit = (id: number, _carer: string, _pacient: string) => {
+//     setLoadingEditId(id);
+//     setIsViewOnly(false); // Desactivar modo visualización (permitir edición)
+//     setSelectedId(id);
+//     setTimeout(() => {
+//       setLoadingEditId(null);
+//       setModalOpen(true);
+//     }, 1000);
+//   };
+
+//   const handleCloseModal = () => {
+//     setModalOpen(false);
+//     setSelectedId(null);
+//   };
+
+//   return (
+//     <>
+//       <table className="tabla-auditorias">
+//         <thead>
+//           <tr>
+//             <th>Beneficiario</th>
+//             <th>Cuidador</th>
+//             <th>Fecha de Carga</th>
+//             <th>Planilla</th>
+//             <th>Ver</th>
+//             <th>Editar</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {auditorias.map((auditoria) => (
+//             <tr key={auditoria.sheetCompletedId}>
+//               <td>{auditoria.pacient}</td>
+//               <td>{auditoria.carer}</td>
+//               <td>{new Date(auditoria.sheetCompletedDate).toLocaleDateString()}</td>
+//               <td>{auditoria.sheetName}</td>
+//               <td>
+//                 <button
+//                   onClick={() => handleView(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}
+//                   disabled={loadingId === auditoria.sheetCompletedId}
+//                 >
+//                   {loadingId === auditoria.sheetCompletedId ? (
+//                     <span className="spinner"></span>
+//                   ) : (
+//                     'Ver'
+//                   )}
+//                 </button>
+//               </td>
+//               <td>
+//                 <button
+//                   onClick={() => handleEdit(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}
+//                   disabled={loadingEditId === auditoria.sheetCompletedId}
+//                 >
+//                   {loadingEditId === auditoria.sheetCompletedId ? (
+//                     <span className="spinner"></span>
+//                   ) : (
+//                     'Editar'
+//                   )}
+//                 </button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       {isModalOpen && selectedId !== null && (
+//         <EditarAuditoriaModal
+//           id={selectedId}
+//           onClose={handleCloseModal}
+//           isViewOnly={isViewOnly}
+//           carerName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.carer || ''}
+//           patientName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.pacient || ''}
+//         />
+//       )}
+//     </>
+//   );
+// };
+
+// export default AuditoriaTabla;
+
+
+
+
 import React, { useState } from 'react';
 import EditarAuditoriaModal from '../EditarAuditoriaModal/EditarAuditoriaModal';
 import './AuditoriaTabla.css';
@@ -1601,37 +1862,38 @@ interface AuditoriaTablaProps {
   auditorias: AuditoriaItem[];
   pacientes: User[];
   asistentes: User[];
-  onViewDetails?: (id: number, carerName: string, patientName: string) => void; // Nueva prop
+  onViewDetails?: (id: number, carerName: string, patientName: string) => void;
 }
 
 const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetails }) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [isViewOnly, setIsViewOnly] = useState<boolean>(false);
-  const [loadingId, setLoadingId] = useState<number | null>(null);
-  const [loadingEditId, setLoadingEditId] = useState<number | null>(null);
+  const [loadingAction, setLoadingAction] = useState<{ id: number | null; action: 'view' | 'edit' | null }>({
+    id: null,
+    action: null,
+  });
 
   const handleView = (id: number, carer: string, pacient: string) => {
     if (onViewDetails) {
-      onViewDetails(id, carer, pacient); // Llamar a la prop `onViewDetails`
+      onViewDetails(id, carer, pacient);
     } else {
-      // Comportamiento por defecto si `onViewDetails` no está definida
-      setLoadingId(id);
-      setIsViewOnly(true); // Activar modo visualización
+      setLoadingAction({ id, action: 'view' });
+      setIsViewOnly(true);
       setSelectedId(id);
       setTimeout(() => {
-        setLoadingId(null);
+        setLoadingAction({ id: null, action: null });
         setModalOpen(true);
-      }, 1000); // Simulamos un tiempo de carga de 1 segundo
+      }, 1000);
     }
   };
 
   const handleEdit = (id: number, _carer: string, _pacient: string) => {
-    setLoadingEditId(id);
-    setIsViewOnly(false); // Desactivar modo visualización (permitir edición)
+    setLoadingAction({ id, action: 'edit' });
+    setIsViewOnly(false);
     setSelectedId(id);
     setTimeout(() => {
-      setLoadingEditId(null);
+      setLoadingAction({ id: null, action: null });
       setModalOpen(true);
     }, 1000);
   };
@@ -1664,8 +1926,9 @@ const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetai
               <td>
                 <button
                   onClick={() => handleView(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}
+                  disabled={loadingAction.id === auditoria.sheetCompletedId && loadingAction.action === 'view'}
                 >
-                  {loadingId === auditoria.sheetCompletedId ? (
+                  {loadingAction.id === auditoria.sheetCompletedId && loadingAction.action === 'view' ? (
                     <span className="spinner"></span>
                   ) : (
                     'Ver'
@@ -1673,8 +1936,11 @@ const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetai
                 </button>
               </td>
               <td>
-                <button onClick={() => handleEdit(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}>
-                  {loadingEditId === auditoria.sheetCompletedId ? (
+                <button
+                  onClick={() => handleEdit(auditoria.sheetCompletedId, auditoria.carer, auditoria.pacient)}
+                  disabled={loadingAction.id === auditoria.sheetCompletedId && loadingAction.action === 'edit'}
+                >
+                  {loadingAction.id === auditoria.sheetCompletedId && loadingAction.action === 'edit' ? (
                     <span className="spinner"></span>
                   ) : (
                     'Editar'
@@ -1686,25 +1952,15 @@ const AuditoriaTabla: React.FC<AuditoriaTablaProps> = ({ auditorias, onViewDetai
         </tbody>
       </table>
 
-      {/* {isModalOpen && selectedId !== null && (
+      {isModalOpen && selectedId !== null && (
         <EditarAuditoriaModal
           id={selectedId}
           onClose={handleCloseModal}
-          isViewOnly={isViewOnly} // Pasar modo visualización según el botón clicado
-          carerName={auditoria.carer} patientName={auditoria.pacient}        />
-      )} */}
-
-{isModalOpen && selectedId !== null && (
-  // Aquí pasamos los datos correctos de la auditoría seleccionada
-  <EditarAuditoriaModal
-    id={selectedId}
-    onClose={handleCloseModal}
-    isViewOnly={isViewOnly}
-    carerName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.carer || ""}
-    patientName={auditorias.find(auditoria => auditoria.sheetCompletedId === selectedId)?.pacient || ""}
-  />
-)}
-
+          isViewOnly={isViewOnly}
+          carerName={auditorias.find((auditoria) => auditoria.sheetCompletedId === selectedId)?.carer || ''}
+          patientName={auditorias.find((auditoria) => auditoria.sheetCompletedId === selectedId)?.pacient || ''}
+        />
+      )}
     </>
   );
 };

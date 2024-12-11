@@ -718,7 +718,7 @@
 .search-title {
   display: flex;
   align-items: center; /* Alinea verticalmente el ícono y el texto */
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
   gap: 8px; /* Espaciado entre el ícono y el texto */
@@ -739,6 +739,7 @@
   box-sizing: border-box;
   background-color: #ffffff00;
   color: #FC308C;
+  box-shadow: 4px 4px 8px #fc308c7e;
 }
 
 .search-input::placeholder {

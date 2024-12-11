@@ -3,6 +3,7 @@
   justify-content: center;
     align-items: center;
     width: 100%;
+    box-shadow: 4px 4px 8px #fc308c7e;
   }
   
   .search-bar input {
@@ -15,6 +16,7 @@
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
     background-color: #ffffff00;
     color: #FC308C;
+    box-shadow: 4px 4px 8px #fc308c7e;
   }
   
   .search-bar input::placeholder {

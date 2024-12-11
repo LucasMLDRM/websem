@@ -1,108 +1,4 @@
-/* .edit-step-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    width: 400px;
-    max-width: 90%;
-  }
-  
-  .modal-content h2 {
-    margin-top: 0;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .multiple-opciones {
-    margin-top: 10px;
-  }
-  
-  .opcion-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .opcion-item input {
-    flex: 1;
-    margin-right: 10px;
-  }
-
-
-  .tablets{
-    margin-bottom: 1.5rem;
-  }
-
-
-.add-step-button {
-    margin-top: 2rem;
-    padding: 5px 10px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background-color: var(--celeste-real);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: auto;
-  }
-  
-  .add-step-button:hover {
-    background-color: var(--celeste-oscuro);
-  }
- 
-
-  .ver-btn{
-    background-color: #ffffff00;
-    border: none;
-    color: var(--fucsia);
-  } */
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* .edit-step-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0);
-    width: 100%;
-    height: 60%; 
-} */
-  
-  .modal-content {
+    .modal-content {
     background-color: #ffffff00;
     padding: 20px;
     border-radius: 10px; /* Bordes redondeados */
@@ -147,7 +43,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    background-color: var(--celeste-real);
+    background: linear-gradient(to left , #fa539e, #bf256a);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -156,7 +52,7 @@
   }
   
   .add-step-button:hover {
-    background-color: var(--celeste-oscuro);
+    background: linear-gradient(to left , #fa539e, #bf256a);
   }
   
   .ver-btn {
@@ -165,6 +61,9 @@
     color: var(--fucsia);
   }
   
+  .ver-btn:hover{
+    background-color: #ddd;
+  }
 
 
 
