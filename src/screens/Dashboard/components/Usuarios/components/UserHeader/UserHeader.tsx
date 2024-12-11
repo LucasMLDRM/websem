@@ -277,6 +277,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ roles, onRoleChange }) => {
           </div>
         </div>
         <div className="header-field">Estado</div>
+        <div className="header-field">Acción</div>
       </div>
     </div>
   );

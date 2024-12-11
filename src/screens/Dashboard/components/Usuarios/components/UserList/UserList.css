@@ -695,8 +695,7 @@
 }
 
 .userlist-inner-container {
-  width: 90%; /* Igual que el componente de planillas */
-  max-width: 1200px; /* Limita el ancho máximo */
+
   padding: 20px;
   border-radius: 8px;
   flex-grow: 1;
@@ -766,39 +765,51 @@
   text-align: left;
 }
 
+.flecharda{
+  color: #ddd;
+margin-left: 43%;
+}
+
 .dropdowncito-wrapper {
   position: relative;
-  display: inline-block;
-  margin-left: 35%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
 }
+
+
+
 
 .dropdowncito {
   position: absolute;
   top: calc(100% + 4px);
-  left: 50%;
-  transform: translateX(-80%);
+  margin-top: 15px;
+  left: 80%;
+  transform: translateX(-80%) translateY(-9%);
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100px;
   z-index: 1000;
-  display: none;
   opacity: 0;
+  visibility: hidden;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
 .dropdowncito-wrapper:hover .dropdowncito,
 .dropdowncito-wrapper:focus-within .dropdowncito {
-  display: block;
   opacity: 1;
   visibility: visible;
 }
 
+
+
 .dropdowncito div {
   padding: 8px;
   cursor: pointer;
-  transition: background-color 0.4s ease;
+  transition: 0.4s ease;
   text-align: center;
   color: black;
 }
@@ -817,14 +828,15 @@
 
 .user-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr;
   gap: 0.5rem;
   padding: 0.75rem;
   margin-bottom: 4px;
   background-color: #f9f9f9;
-  border-radius: 2.5rem;
+  border-radius: 4rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-height: 100px;
+  width: 50rem;
 }
 
 .card-column {
@@ -844,18 +856,14 @@
   margin-top: 10px;
 }
 
-.card-expanded {
-  grid-column: span 5; /* Abarca todas las columnas */
-  text-align: center;
-  margin-top: 5px;
-}
+
 
 .clear-password-button {
-  padding: 5px 10px;
+  padding: 10px 15px;
   background-color: #FC308C;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 2rem;
   cursor: pointer;
   font-size: 0.75rem;
   font-weight: bold;
@@ -867,14 +875,14 @@
 
 .card-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr 1fr; /* Coincide con las columnas de la tabla */
+  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr; /* Coincide con las columnas de la tabla */
   gap: 1rem;
   width: 100%;
 }
 
 .table-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 1fr 1fr; /* Alinea con las tarjetas */
+  grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr; /* Alinea con las tarjetas */
   position: relative;
   border-bottom: 3px solid var(--fucsia-oscuro);
   margin-bottom: 8px;

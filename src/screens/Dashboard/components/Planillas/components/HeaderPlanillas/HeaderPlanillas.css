@@ -16,6 +16,8 @@
   display: flex; /* Usamos flex para alinear el icono y el texto */
   align-items: center; /* Centra el icono y el texto verticalmente */
   gap: 8px; /* Ajusta el espacio entre el icono y el texto */
+  width: 100%;
+  margin-left: auto;
 }
 
 /* Input */

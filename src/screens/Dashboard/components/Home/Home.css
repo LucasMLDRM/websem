@@ -363,6 +363,7 @@
   font-weight: bold;
   position: relative;
   transition: 0.3s;
+
 }
 
 .square::before {
@@ -377,6 +378,7 @@
   border-radius: 4rem 0 4rem 0;
   transition: opacity 0.3s ease;
   z-index: 1;
+  cursor: pointer;
 }
 
 .square:hover::before {
