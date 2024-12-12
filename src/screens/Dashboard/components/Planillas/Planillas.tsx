@@ -7,7 +7,6 @@ import Switch from './components/Switch/Switch';
 import CreatePlanilla from './components/CreatePlanilla/CreatePlanilla';
 import './Planillas.css';
 
-
 type Planilla = {
   id: number;
   name: string;

@@ -83,7 +83,7 @@ const AddStepModal: React.FC<AddStepModalProps> = ({ spreadsheetId, onSave, onCl
     <div className="edit-step-modal-overlay">
       <div className="edit-step-modal">
         <div className="modal-header">
-          <h2>Añadir Consigna</h2>
+          <h2>Añadir Step</h2>
           <button className="close-button" onClick={onClose}>
             <TbX />
           </button>

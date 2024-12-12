@@ -434,7 +434,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './reportsTable.css';
-import { BsLayoutTextSidebar } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa6";
 
 interface Report {
   id: number;
@@ -543,7 +543,7 @@ const ReportsTable: React.FC = () => {
   return (
     <div className="reports-table">
       <h3 className="titulo-reports">
-        <BsLayoutTextSidebar className="icon-reports" /> Reportes
+        <FaRegUser className="icon-reports" /> Reportes
       </h3>
       <table>
         <thead>
@@ -577,50 +577,42 @@ const ReportsTable: React.FC = () => {
           ))}
         </tbody>
       </table>
+
       {selectedReport && (
-  <div className="modal-overlay">
-    <div className="modal-content">
-      <button
-        className="modal-close"
-        onClick={() => setSelectedReport(null)}
-      >
-        &times;
-      </button>
-      <h4>Formulario de Resolución</h4>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>Asistente:</label>
-          <input
-            type="text"
-            value={`${users[selectedReport.userReporting]?.firstName} ${users[selectedReport.userReporting]?.lastName}`}
-            readOnly
-          />
-        </div>
+        <div className="resolve-form">
+          <h4>Formulario de Resolución</h4>
+          <form onSubmit={handleFormSubmit}>
+            <div>
+              <label>Asistente:</label>
+              <input
+                type="text"
+                value={`${users[selectedReport.userReporting]?.firstName} ${users[selectedReport.userReporting]?.lastName}`}
+                readOnly
+              />
+            </div>
 
-        <div>
-          <label>Tipo de Reporte:</label>
-          <input type="text" value={selectedReport.reportType} readOnly />
+            <div>
+              <label>Tipo de Reporte:</label>
+              <input type="text" value={selectedReport.reportType} readOnly />
+            </div>
+            <div>
+              <label>Observación:</label>
+              <input type="text" value={selectedReport.observations} readOnly />
+            </div>
+            <div>
+              <label>Resolución:</label>
+              <select value={resolution} onChange={handleResolutionChange}>
+                <option value={0}>Pendiente</option>
+                <option value={1}>Resuelto</option>
+                <option value={2}>Cancelado</option>
+              </select>
+            </div>
+            <div>
+              <button type="submit">Guardar Resolución</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Observación:</label>
-          <input type="text" value={selectedReport.observations} readOnly />
-        </div>
-        <div>
-          <label>Resolución:</label>
-          <select value={resolution} onChange={handleResolutionChange}>
-            <option value={0}>Pendiente</option>
-            <option value={1}>Resuelto</option>
-            <option value={2}>Cancelado</option>
-          </select>
-        </div>
-        <div>
-          <button type="submit">Guardar Resolución</button>
-        </div>
-      </form>
-    </div>
-  </div>
-)}
-
+      )}
     </div>
   );
 };

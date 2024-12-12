@@ -621,7 +621,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaBars, FaBell } from 'react-icons/fa';
-
+import axios from 'axios';
 import './sidebar.css';
 
 
@@ -629,6 +629,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [username, setUsername] = useState('');
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [notificationCount, setNotificationCount] = useState(0);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -645,7 +646,11 @@ const Sidebar = () => {
       if (!token) return;
 
       try {
- 
+        const response = await axios.get('https://emmanuel.somee.com/api/v1/UserNotifications', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const notifications = Array.isArray(response.data) ? response.data : [];
+        setNotificationCount(notifications.length);
       } catch (error) {
         console.error('Error al obtener notificaciones:', error);
       }
@@ -663,7 +668,7 @@ const Sidebar = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
     if (!isNotificationsOpen) {
       // Si se abren las notificaciones, se restablece el contador a 0
-
+      setNotificationCount(0);
     }
   };
 
@@ -693,6 +698,9 @@ const Sidebar = () => {
             <div className="notification-icon-container" onClick={toggleNotifications}>
             <Link className='profile-text' to="notificaciones" onClick={handleLinkClick}>
               <FaBell className="notification-icon" />
+              {notificationCount > 0 && (
+                <span className="notification-bubble">{notificationCount}</span>
+              )}
             </Link>
             </div>
           </div>

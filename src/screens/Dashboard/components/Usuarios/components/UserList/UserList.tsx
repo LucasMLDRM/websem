@@ -2782,13 +2782,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { GoChevronDown } from "react-icons/go"; // Importa el ícono de expansión
 import { BsPerson } from "react-icons/bs";
-import StatusSwitch from "../StatusSwitch/StatusSwitch";
 import "./UserList.css";
 
 interface User {
   firstName: string;
   lastName: string;
-  userName: string;
   rolesName: string;
   isEnabled: boolean;
   id: number;
@@ -2812,6 +2810,7 @@ const UserList: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [showRoleDropdown, setShowRoleDropdown] = useState<boolean>(false); // Estado para controlar el dropdown
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null); // Estado para expandir la tarjeta
   const usersPerPage = 5;
 
   // Obtener roles desde el endpoint
@@ -2873,6 +2872,9 @@ const UserList: React.FC = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const handleExpand = (userId: number) => {
+    setExpandedCard(expandedCard === userId ? null : userId); // Alternar expansión de la tarjeta
+  };
 
   const handleRoleChange = (role: string) => {
     setSelectedRole(role); // Cambiar el rol seleccionado
@@ -2903,7 +2905,6 @@ const UserList: React.FC = () => {
             onMouseLeave={() => setShowRoleDropdown(false)}
           >
             <span className="dropdowncito-trigger">{selectedRole || "Rol"}</span>
-            <GoChevronDown className="flecharda"/>
             {showRoleDropdown && (
               <div className="dropdowncito">
                 <div onClick={() => handleRoleChange("")}>Todos</div>
@@ -2916,27 +2917,29 @@ const UserList: React.FC = () => {
             )}
           </div>
           <span>Estado</span>
-          <span>Contraseña</span>
         </div>
 
+        {currentUsers.map((user) => (
+          <div key={user.id} className="user-card">
+            <div className="card-column">{user.firstName}</div>
+            <div className="card-column">{user.lastName}</div>
+            <div className="card-column">{user.email}</div>
+            <div className="card-column">{user.rolesName}</div>
+            <div className="card-column">{user.isEnabled ? "Activo" : "Inactivo"}</div>
 
+            {/* Icono para expandir la tarjeta */}
+            <div className="expand-icon" onClick={() => handleExpand(user.id)}>
+              <GoChevronDown />
+            </div>
 
-{currentUsers.map((user) => (
-  <div key={user.id} className="user-card">
-    <div className="card-column">{user.firstName}</div>
-    <div className="card-column">{user.lastName}</div>
-    <div className="card-column">{user.email}</div>
-    <div className="card-column">{user.rolesName}</div>
-    <div className="card-column">
-      <StatusSwitch row={user} />
-    </div>
-    <div className="card-column">
-      <button className="clear-password-button">Limpiar</button>
-    </div>
-
-  </div>
-))}
-
+            {/* Mostrar contenido expandido si la tarjeta está expandida */}
+            {expandedCard === user.id && (
+              <div className="card-expanded">
+                <button className="clear-password-button">Limpiar Contraseña</button>
+              </div>
+            )}
+          </div>
+        ))}
 
         <div className="pagination-container">
           <button className="add-user-button">Agregar Usuario</button>
@@ -2958,4 +2961,3 @@ const UserList: React.FC = () => {
 };
 
 export default UserList;
-  

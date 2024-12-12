@@ -5,7 +5,7 @@
   display: flex; /* Usamos flex para alinear los elementos en una fila */
   justify-content: space-between; /* Alinea el contenido entre el título y el input */
   align-items: center; /* Centra verticalmente los elementos */
-  margin-bottom: 2rem;
+
 }
 
 /* Título */
@@ -16,8 +16,6 @@
   display: flex; /* Usamos flex para alinear el icono y el texto */
   align-items: center; /* Centra el icono y el texto verticalmente */
   gap: 8px; /* Ajusta el espacio entre el icono y el texto */
-  width: 100%;
-  margin-left: auto;
 }
 
 /* Input */
@@ -31,7 +29,6 @@
   box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
   background-color: #ffffff00;
   color: #FC308C;
-  box-shadow: 4px 4px 8px #fc308c7e;
 }
 
 .header-planillas-search-input::placeholder {

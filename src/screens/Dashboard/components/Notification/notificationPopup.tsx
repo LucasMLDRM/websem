@@ -586,8 +586,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './notificationPopup.css';
-
-import { BsBell } from "react-icons/bs";
+import { BiSpreadsheet } from "react-icons/bi"; 
 
 interface Notification {
   id: number;
@@ -698,7 +697,7 @@ const NotificationPopup: React.FC = () => {
 
   return (
     <div className='contai'>
-      <h3 className='titulo-noti'><BsBell className='logonoti' />Notificaciones</h3>
+      <h3 className='titulo-noti'><BiSpreadsheet className='logonoti' />Notificaciones</h3>
 
       {selectedNotification ? (
         <div className="resolve-notification">
@@ -729,9 +728,8 @@ const NotificationPopup: React.FC = () => {
           </div>
           <div>
             <label>
-              <strong className='resu'>Resultado:</strong><br></br>
+              <strong>Resultado:</strong>
               <textarea
-                className='tarea'
                 value={resolution}
                 onChange={(e) => setResolution(e.target.value)}
                 placeholder="Escribe el resultado"

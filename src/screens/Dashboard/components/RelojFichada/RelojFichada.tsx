@@ -447,7 +447,6 @@
 
 import React, { useState } from 'react';
 import './RelojFichada.css';
-import { FaClock } from 'react-icons/fa';
 
 interface Fichada {
   id: number;
@@ -555,10 +554,7 @@ const RelojFichada: React.FC = () => {
 
   return (
     <div className="reloj-fichada">
-      <div className='hedrej'>
-      <FaClock className="clock-icon" />
       <h1>Reloj Fichada</h1>
-      </div>
       <header className="filters">
         <select name="assistant" value={filters.assistant} onChange={handleFilterChange}>
           <option value="">Seleccionar Asistente</option>

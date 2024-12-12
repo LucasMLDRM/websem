@@ -63,7 +63,6 @@ table td {
 }
 
 table tr {
-  background-color: #ffffff;
   border-bottom: 1px solid #ddd;
 }
 
@@ -73,15 +72,6 @@ table tr:last-child td {
 
 table tr:hover {
   background-color: #f2f2f2;
-}
-
-
-
-.tarea{
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  margin: 4px;
-
 }
 
 .notification-popup::-webkit-scrollbar {
@@ -101,6 +91,7 @@ button {
 
 button:hover {
   background-color: var(--fucsia-oscuro);
+  transform: translateY(-2px);
 }
 
 button:focus {

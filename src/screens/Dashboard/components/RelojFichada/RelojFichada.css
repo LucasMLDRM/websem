@@ -14,12 +14,11 @@
   .filters input {
     padding: 10px;
     font-size: 14px;
-    border: 1px solid #FC308C;
+    border: 1px solid #ffffff;
     border-radius: 8px;
     width: 100%;
-    background-color: #ffffff00;
-    color: #ffffff;
-    margin-left: 10px;
+    background-color: #ffffff;
+    color: #333;
   }
   
   .filters input[type="text"] {
@@ -182,28 +181,9 @@
     box-sizing: border-box; /* El padding no afecta el ancho */
     background-color: #ffffff00; /* Fondo transparente */
     color: #FC308C; /* Color del texto */
-    box-shadow: 4px 4px 8px #fc308c7e;
   }
   
   .filters-search-input::placeholder {
     color: #FC308C; /* Color del placeholder */
   }
   
-
-  .hedrej{
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Espacio entre el ícono y el título */
-    margin-bottom: 10px;
-  }
-
-  .clock-icon {
-    color: white;
-    font-size: 3rem; /* Tamaño del ícono */
-  }
-  
-  h1 {
-    margin: 0;
-    color: white; /* Color del título */
-    font-size: 1.5rem; /* Tamaño del título */
-  }
