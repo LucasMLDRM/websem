@@ -89,9 +89,7 @@ const Dashboard = () => {
 <div className="dashboard">
   <Sidebar />
   <div className="dashboard-content">
-    <div className="dashboard-header">
-      <div className="super-admin-badge">Super admin</div>
-    </div>
+
     <SwitchTransition mode="out-in">
       <CSSTransition
         key={location.pathname}

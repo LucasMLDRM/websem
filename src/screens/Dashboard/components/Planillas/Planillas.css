@@ -319,3 +319,8 @@
   color: var(--fucsia);
   font-size: large;
 }
+
+.loading-container{
+  width: 100%;
+  margin: auto;
+}
