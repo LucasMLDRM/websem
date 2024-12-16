@@ -197,6 +197,7 @@
   text-align: center;
   transition: all 0.3s ease-in-out;
   margin: 30px 10% 30px 10%;
+  font-family: 'Red Hat Display';
 }
 
 .logout-button:hover {
