@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './screens/Login/components/login/login';
 import Dashboard from './screens/Dashboard/dashboard';
 import ProtectedRoute from './screens/Login/ProtectedRoute.tsx';
+import './App.css'
 
 const App = () => {
     return (
