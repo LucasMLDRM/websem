@@ -155,6 +155,7 @@
   scale: 1; /* Escala el tamaño del componente */
   min-height: 90vh; /* Ajusta la altura mínima al 90% del viewport */
   width: 100%;
+  background-color: red;
 }
 
 .planillas-table {
