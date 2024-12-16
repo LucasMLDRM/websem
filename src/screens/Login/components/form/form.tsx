@@ -151,13 +151,13 @@ const MyForm = () => {
           <Form className="login-form">
             <div className='label-log'>
               <label htmlFor="username">Usuario</label>
-              <Field type="text" name="username" id="username" />
+              <Field type="text" name="username" id="username" className='inputUser'/>
               <ErrorMessage name="username" component="div" className="error" />
             </div>
             <div className='label-log'>
               <label htmlFor="password">Contraseña</label>
               <div className="password-field">
-                <Field type={showPassword ? 'text' : 'password'} name="password" id="password" />
+                <Field type={showPassword ? 'text' : 'password'} name="password" id="password" className='inputPassword' />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}

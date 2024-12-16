@@ -33,8 +33,6 @@ body {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 255, 0); 
-  color: #5c5c5c;
 }
 
 .login-form input:focus {
@@ -96,5 +94,12 @@ body {
   color: var(--fucsia);
 }
 
-  
-  
+.inputUser {
+  color: #fff !important;
+  margin-left:  10px!important;
+}
+
+.inputPassword {
+  color: #fff !important;
+  margin-left:  10px!important;
+}
