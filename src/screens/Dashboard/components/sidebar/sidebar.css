@@ -76,14 +76,18 @@
 
   /* PROFILE */
   .profile-container{
-    margin-left: 150px!important;
+    margin-left: 75px!important;
   }
   .sidebar ul {
-    margin-left: 110px!important;
+    margin-left: 80px!important;
   }
   .logout-button {
-    margin-left: 160px!important;
+    margin-left: 110px!important;
     width: 50%!important;
+  }
+  .sidebar ul li {
+    padding: 0px!important;
+    text-align: center;
   }
 }
 

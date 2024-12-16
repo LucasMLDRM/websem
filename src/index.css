@@ -1,5 +1,5 @@
 :root {
-  font-family: "Red Hat Display", sans-serif;
+  font-family: "Red Hat Display";
   line-height: 1.5;
   font-weight: 400;
 
@@ -34,10 +34,6 @@ body {
   -moz-osx-font-smoothing: grayscale; 
 
   padding: 0;
-  /* background-image: url('./assets/pattern.png');
-  background-repeat: repeat;
-  background-size: auto;
-  background-position: center; */
   background-image: url('./assets/fondo-luces-home.jpg');  /* Ruta a tu imagen */
   background-size: cover;  /* Hace que la imagen cubra todo el fondo */
   background-position: center center;  /* Centra la imagen */
@@ -54,7 +50,12 @@ h1 {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
   }
 
+}
+
+@media (max-width: 768px) {
+  body{
+    height: 200vh!important;
+  }
 }
