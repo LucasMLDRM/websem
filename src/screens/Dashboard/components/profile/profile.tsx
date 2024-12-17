@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { BsFillPencilFill, BsFillEyeFill } from 'react-icons/bs';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './profile.css';
 import Profileheader from './profileheader/profileheader';
@@ -71,28 +72,52 @@ const Profile: React.FC = () => {
 
   return (
     <div className="profile-cont">
-      <Profileheader></Profileheader>
+      <Profileheader />
 
       <div className="pinky-header">
-        <span className='text-header-table'> Pefil de usuario </span>
+        <span className='text-header-table'> Perfil de usuario </span>
       </div>
       <div className="profile-card">
-        <div className="profile-item">
-          <span className="profile-label">Usuario:</span> {userData.userName}
+        <div className='column-items1'>
+          <div className="profile-item">
+            <span className="profile-label">Usuario:</span> 
+          </div>
+          <div className="profile-item">
+            <span className="profile-label">Nombre Completo:</span> 
+          </div>
+          <div className="profile-item">
+            <span className="profile-label">Rol:</span> 
+          </div>
+          <div className="profile-item">
+            <span className="profile-label">Email:</span>
+          </div>
+          <div className="profile-item-password">
+            <span className="profile-label">Contraseña: </span> 
+          </div>
         </div>
-        <div className="profile-item">
-          <span className="profile-label">Nombre Completo:</span> {userData.firstName} {userData.lastName}
-        </div>
-        <div className="profile-item">
-          <span className="profile-label">Rol:</span> {userData.role}
-        </div>
-        <div className="profile-item">
-          <span className="profile-label">Email:</span> {userData.email}
+        <div className='column-items2'>
+          <div className="profile-item">
+            <span className='profile-content'>{userData.userName}</span>
+          </div>
+          <div className="profile-item">
+            <span className='profile-content'> {userData.firstName} {userData.lastName} </span>
+          </div>
+          <div className="profile-item">
+            <span className='profile-content'> {userData.role} </span>
+          </div>
+          <div className="profile-item">
+            <span className='profile-content'> {userData.email} </span>
+          </div>
+          <div className='profile-item-password'>
+            <div className='profile-container-icons-edit'>
+              <BsFillEyeFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Ver</span>   <BsFillPencilFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Editar</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <button onClick={() => setIsModalOpen(true)} className="change-password-button">
-        Cambiar Contraseña
+        <span className='save-button'>Cambiar Contraseña</span>
       </button>
 
       {isModalOpen && (

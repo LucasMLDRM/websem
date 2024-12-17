@@ -10,8 +10,11 @@
 
   .pinky-header {
     background-color: #FC308C;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding-left: 25px;
+    padding-top: 15px;
+    padding-bottom: 5px;
   }
   .text-header-table{
     font-family: 'Red Hat Display';
@@ -19,6 +22,7 @@
     font-size: 24px;
     margin-left: 10px;
     font-weight: 700;
+    line-height: 31.75px;
   }
   .profile-title {
     text-align: center;
@@ -29,36 +33,90 @@
   }
   
   .profile-card {
+    display: flex!important;
     background-color: #fff;
     color: #f9f9f900;
-    border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: row!important;
   }
   
   .profile-item {
+    display: flex;
     margin-bottom: 10px;
     color: #000; 
-    border-bottom: solid 1px var(--fucsia);
-    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid  1px var(--fucsia)!important;
+  }
+
+  .profile-item-password {
+    display: flex;
+    margin-bottom: 10px;
+    color: #000; 
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   .profile-label {
-    font-weight: bold;
     margin-right: 10px;
-    color: #000; 
+    color: #6D6D6D; 
+    margin-left: 35px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Red Hat Display';
   }
   
+  .profile-content{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Red Hat Display';
+    color: #6D6D6D;
+    margin-left: 10px;
+  }
+  .profile-container-icons-edit{
+    display: flex;
+  }
+  .icon{
+    margin-top: 6px;
+    margin-left: 5px
+  }
+  .column-items1{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+  }
+  .column-items2{
+    display: flex!important;
+    flex-direction: column!important;
+    width: 70%;
+  }
+  .text-icon{
+    font-family: 'Red Hat Display';
+    font-size: 20px;
+    font-weight: 400;
+    color: #6D6D6D;
+    margin-left: 10px;
+  }
   .change-password-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: var(--fucsia);
+    display: flex;
+    margin: 30px 0px;
+    background: linear-gradient(to right, #FC308C, #F48ACE);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 40px;
     cursor: pointer;
     transition: all 0.6s;
+    width: 252px;
+    height: 53px;
+    justify-content: center;
+    align-items: center;
+  }
+  .save-button{
+    color: #fff;
+    font-family: 'Red Hat Display';
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
   }
   
   .change-password-button:hover {
