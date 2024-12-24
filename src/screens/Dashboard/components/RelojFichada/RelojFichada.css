@@ -1,189 +1,91 @@
-.reloj-fichada {
-    padding: 20px;
+.reloj-fichada-container {
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f500;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  }
-  
-  .filters {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .filters select,
-  .filters input {
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #333;
-  }
-  
-  .filters input[type="text"] {
-    flex: 2;
-  }
-  
-  .filters input[type="date"] {
-    flex: 1;
-  }
-  
-  .fichada-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .fichada-table th,
-  .fichada-table td {
-    padding: 12px;
-    text-align: left;
-    font-size: 14px;
-    word-break: break-word;
-  }
-  
-  .fichada-table th {
-    background-color: #ff4d88;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .fichada-table td {
-    background-color: #fff;
-    color: #333;
-  }
-  
-  .fichada-table tr {
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .fichada-table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  .fichada-table tr:hover {
-    background-color: #f2f2f2;
-  }
-  
-  .fichada-table button {
-    background-color: #ff6fa1;
-    color: #fff;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .fichada-table button:hover {
-    background-color: #ff477d;
-    transform: translateY(-2px);
-  }
-  
-  .fichada-table button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 77, 136, 0.3);
-  }
-  
-  .edit-popup {
-    width: 50%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 30px 50px 30px 30px;
-    border-radius: 1rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-  }
-  
-  .edit-popup h3 {
-    font-size: 20px;
-    color: #ff4d88;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  .edit-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .edit-form input,
-  .edit-form textarea {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    background-color: #ccc;
-    color: #333;
-  }
-  
-  .edit-form textarea {
-    resize: vertical;
-  }
-  
-  .popup-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .popup-actions button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-  }
-  
-  .popup-actions button:nth-child(1) {
-    background-color: var(--fucsia-oscuro);
-    color: #fff;
-  }
-  
-  .popup-actions button:nth-child(1):hover {
-    background-color: var(--fucsia);
-  }
-  
-  .popup-actions button:nth-child(2) {
-    background-color: var(--fucsia-claro);
-    color: #fff;
-  }
-  
-  .popup-actions button:nth-child(2):hover {
-    background-color: var(--fucsia);
-  }
-  
-  .edit-popup::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  
+.reloj-fichada-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
+.reloj-fichada-title {
+  font-size: 2rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #9696962c;
+}
 
-  .filters input.filters-search-input {
-    width: 15rem;
-    max-width: 28rem; /* Tamaño máximo para la barra de búsqueda */
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #FC308C; /* Color del borde */
-    border-radius: 2rem 0 2rem 0; /* Bordes redondeados */
-    box-sizing: border-box; /* El padding no afecta el ancho */
-    background-color: #ffffff00; /* Fondo transparente */
-    color: #FC308C; /* Color del texto */
-  }
-  
-  .filters-search-input::placeholder {
-    color: #FC308C; /* Color del placeholder */
-  }
-  
+.reloj-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #fc308c;
+  border-radius: 1rem;
+  margin: 10px 0;
+}
+
+.btn-obtener-datos {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(to right, #fa539e, #bf256a);
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-obtener-datos:hover {
+  background: linear-gradient(to left, #bf256a, #fa539e);
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  color: red;
+}
+
+.fichada-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.fichada-table th, .fichada-table td {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.fichada-table th {
+  background-color: #fc308c;
+  color: white;
+  text-transform: uppercase;
+}
+
+.fichada-table td {
+  background-color: #fff;
+  color: #333;
+}
+
+.fichada-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.fichada-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.fichada-table td, .fichada-table th {
+  border: 1px solid #ddd;
+}
