@@ -80,44 +80,37 @@ const Profile: React.FC = () => {
       <div className="profile-card">
         <div className='column-items1'>
           <div className="profile-item">
-            <span className="profile-label">Usuario:</span> 
+            <span className="profile-label">Usuario:</span>  <span className='profile-content'>{userData.userName}</span>
           </div>
           <div className="profile-item">
-            <span className="profile-label">Nombre Completo:</span> 
+            <span className="profile-label">Nombre Completo:</span>  <span className='profile-content'> {userData.firstName} {userData.lastName} </span>
           </div>
           <div className="profile-item">
-            <span className="profile-label">Rol:</span> 
+            <span className="profile-label">Rol:</span> <span className='profile-content'> {userData.role} </span>
           </div>
           <div className="profile-item">
-            <span className="profile-label">Email:</span>
+            <span className="profile-label">Email:</span>  <span className='profile-content'> {userData.email} </span>
           </div>
           <div className="profile-item-password">
             <span className="profile-label">Contraseña: </span> 
-          </div>
-        </div>
-        <div className='column-items2'>
-          <div className="profile-item">
-            <span className='profile-content'>{userData.userName}</span>
-          </div>
-          <div className="profile-item">
-            <span className='profile-content'> {userData.firstName} {userData.lastName} </span>
-          </div>
-          <div className="profile-item">
-            <span className='profile-content'> {userData.role} </span>
-          </div>
-          <div className="profile-item">
-            <span className='profile-content'> {userData.email} </span>
-          </div>
-          <div className='profile-item-password'>
             <div className='profile-container-icons-edit'>
-              <BsFillEyeFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Ver</span>   <BsFillPencilFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Editar</span>
+              <div onClick={()=>setIsModalOpen(true)}>
+                <BsFillEyeFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Ver</span>   
+                <BsFillPencilFill size={18} color='#6D6D6D' className='icon'/><span className='text-icon'>Editar</span>
+              </div>
+            </div>
+            <div className='profile-container-icons-edit-mobile'>
+              <div onClick={()=> setIsModalOpen(true)}>
+                <BsFillEyeFill size={15} color='#6D6D6D' className='icon'/><span className='text-icon'>Ver</span>
+                <BsFillPencilFill size={15} color='#6D6D6D' className='icon'/><span className='text-icon'>Editar</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <button onClick={() => setIsModalOpen(true)} className="change-password-button">
-        <span className='save-button'>Cambiar Contraseña</span>
+        <span className='save-button'>Guardar</span>
       </button>
 
       {isModalOpen && (

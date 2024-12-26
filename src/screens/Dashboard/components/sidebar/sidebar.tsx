@@ -6,7 +6,7 @@ import './sidebar.css';
 
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [username, setUsername] = useState('');
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
