@@ -1,17 +1,29 @@
    .profile-cont {
     position: relative;
-    width: 50rem;
+    width: 67.5vw;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f900;
     border-radius: 10px;
-
     color: #000; 
   }
-  
 
-
-
+  .pinky-header {
+    background-color: #FC308C;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding-left: 25px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+  }
+  .text-header-table{
+    font-family: 'Red Hat Display';
+    color: #fff;
+    font-size: 24px;
+    margin-left: 10px;
+    font-weight: 700;
+    line-height: 31.75px;
+  }
   .profile-title {
     text-align: center;
     vertical-align: middle;
@@ -21,35 +33,96 @@
   }
   
   .profile-card {
+    display: flex!important;
     background-color: #fff;
     color: #f9f9f900;
-    border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: row!important;
   }
   
   .profile-item {
+    display: flex;
     margin-bottom: 10px;
     color: #000; 
-    border-bottom: solid 1px var(--fucsia);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid  1px var(--fucsia)!important;
+    justify-content: space-between;
+  }
+
+  .profile-item-password {
+    display: flex;
+    margin-bottom: 10px;
+    color: #000; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: space-between;
   }
   
   .profile-label {
-    font-weight: bold;
     margin-right: 10px;
-    color: #000; 
+    color: #6D6D6D; 
+    margin-left: 35px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Red Hat Display';
   }
   
+  .profile-content{
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Red Hat Display';
+    color: #6D6D6D;
+    display: flex;
+    justify-content: flex-start;
+    width: 75%;
+  }
+  .profile-container-icons-edit{
+    display: flex;
+    justify-content: flex-start;
+    width: 75%;
+  }
+  .icon{
+    margin-top: 6px;
+    margin-left: 5px
+  }
+  .column-items1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .column-items2{
+    display: flex!important;
+    flex-direction: column!important;
+    width: 70%;
+  }
+  .text-icon{
+    font-family: 'Red Hat Display';
+    font-size: 20px;
+    font-weight: 400;
+    color: #6D6D6D;
+    margin-left: 10px;
+  }
   .change-password-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: var(--fucsia);
+    display: flex;
+    margin: 30px 0px;
+    background: linear-gradient(to right, #FC308C, #F48ACE);
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 40px;
     cursor: pointer;
     transition: all 0.6s;
+    width: 252px;
+    height: 53px;
+    justify-content: center;
+    align-items: center;
+  }
+  .save-button{
+    color: #fff;
+    font-family: 'Red Hat Display';
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
   }
   
   .change-password-button:hover {
@@ -149,4 +222,45 @@
     flex-direction: row;
     vertical-align: middle;
   }
-  
+
+  .profile-container-icons-edit-mobile{
+    display: none;
+  }
+  @media(max-width: 768px){
+    .profile-cont{
+      width: 15rem!important;
+      margin-left: 70px!important;
+    }
+    .column-items1{
+      width: 100%;
+    }
+    .profile-label {
+      margin-right: 0px;
+      margin-left: 15px;
+      font-size: 15px;
+    }
+    .profile-content{
+      font-size: 15px;
+      display: inline-block;
+      width: 150px; /* Ajusta este valor según tus necesidades */
+      word-break: break-all; /* Fuerza el quiebre de palabras largas */
+    }
+    .profile-container-icons-edit{
+      display: none;
+    }
+    .profile-container-icons-edit-mobile{
+      display: flex;
+      margin-right: 5px;
+    }
+    .text-icon{
+      font-size: 15px;
+    }
+  }
+
+    
+  @media(min-width: 769px) and (max-width: 1500px) {
+    .profile-cont{
+       width: 50rem!important;
+       margin-left: 50px!important;
+    } 
+   }
