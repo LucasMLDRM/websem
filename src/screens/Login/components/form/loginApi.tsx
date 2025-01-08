@@ -75,6 +75,7 @@ interface LoginData {
 }
 
 interface LoginResponse {
+  roles: string[];
   accessToken: string;
   token: string;
 }
