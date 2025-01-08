@@ -390,12 +390,12 @@ button:disabled {
 
 
 
-.form-container {
+.forma-container {
   width: 70%; 
   height: 70%; 
   margin: auto;
   padding: 15px; 
-  background: rgba(255, 255, 255, 0.779);
+  background: rgb(255, 255, 255);
   border-radius: 2rem;
   box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1);
   scale: 0.88;
@@ -481,7 +481,7 @@ button:disabled {
   padding: 8px; 
   border: 1px solid var(--azul-oscuro);
   border-radius: 2rem;
-  background-color: white;
+  background-color: rgb(238, 238, 238);
   font-size: 16px; 
   box-sizing: border-box;
   color: black;

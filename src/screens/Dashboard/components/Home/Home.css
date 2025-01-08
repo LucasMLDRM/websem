@@ -231,7 +231,7 @@
 
 
 
-
+ 
 
 .home-container {
   display: flex;
@@ -438,10 +438,10 @@
 .bottom-links {
   scale: 0.8;
   display: flex;
-  justify-content: space-evenly; /* Espaciado uniforme */
-  width: 100%; /* Ocupa todo el ancho del cuadrado */
-  position: absolute; /* Posicionado en la parte inferior */
-  bottom: 10px; /* Ajusta según lo necesites */
+  justify-content: space-evenly;
+  width: 100%; 
+  position: absolute; 
+  bottom: 10px; 
   z-index: 2;
   position: relative;
   margin-top: 0.6rem;
@@ -450,16 +450,16 @@
 }
 
 .bottom-link {
-  font-family: 'Arial', sans-serif; /* Fuente ligera */
-  font-weight: 300; /* Ligera */
+  font-family: 'Arial', sans-serif; 
+  font-weight: 300; 
   color: white;
-  text-decoration: none; /* Sin subrayado */
-  font-size: 0.9rem; /* Tamaño de fuente */
+  text-decoration: none; 
+  font-size: 0.9rem; 
   transition: color 0.3s ease;
 }
 
 .bottom-link:hover {
-  color: #4b1933; /* Color al pasar el cursor */
+  color: #4b1933; 
 }
 
 
@@ -469,4 +469,52 @@
 
 
 
+ 
 
+
+
+
+
+/* Media queries para pantallas móviles */
+@media (max-width: 768px) {
+  .welcome-message {
+    font-size: 1.5rem;
+    
+    margin-top: -640px;
+    margin-left: 25px;
+  }
+
+  .logo{
+    width: 30%;
+    margin-left: -20px;
+  }
+
+  .cnt-txt{
+    margin-top: 2.5rem;
+    margin-left: 0rem;
+  }
+  
+
+  .squares-container {
+    margin-top: -220px;
+    scale: 0.85;
+  }
+
+  .squares-row {
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 1rem; 
+  }
+
+  .square {
+    width: 10rem;
+    height: 10rem;
+    margin: 15px 0;
+  }
+
+  .cnt-ico-us {
+    width: 3rem; 
+    padding: 0.1rem;
+    margin: 10px;
+  }
+}
