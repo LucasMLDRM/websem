@@ -1,0 +1,106 @@
+/* Estilos generales */
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  /* Botón Cerrar Sesión */
+  .logout-button {
+
+
+    left: 0px;
+  
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 10%;
+  }
+  
+  /* Datos del paciente */
+  .patient-data {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 2px solid;
+    color: black;
+  }
+  
+  .patient-data h2 {
+    margin-bottom: 15px;
+  }
+  
+  .patient-data p {
+    margin: 5px 0;
+  }
+  
+  .patient-data strong {
+    color: #333;
+  }
+  
+  /* Sección de Planillas */
+  .planillas-section {
+    border: 2px ;
+    padding: 20px;
+  }
+  
+  .planillas-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .planillas-table th, .planillas-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .planilla-title {
+    cursor: default; /* No será un enlace */
+    font-weight: bold;
+  }
+  
+  
+  /* Popup */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .popup-title {
+    color: black;
+    margin-bottom: 10px;
+  }
+  
+  .popup-content p {
+    color: black;
+  }
+  
+  .close-popup-button {
+    padding: 10px 20px;
+    background-color: var(--fucsia);
+    color: white;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+  
