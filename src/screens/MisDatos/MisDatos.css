@@ -1,11 +1,15 @@
-/* Estilos generales */
+/* Estilos generales
 .container {
     padding: 20px;
     font-family: Arial, sans-serif;
     position: relative;
   }
   
-  /* Botón Cerrar Sesión */
+  .p-items{
+    color: black;
+  }
+
+
   .logout-button {
 
 
@@ -20,7 +24,7 @@
     margin-bottom: 10%;
   }
   
-  /* Datos del paciente */
+
   .patient-data {
     background-color: white;
     padding: 20px;
@@ -42,7 +46,7 @@
     color: #333;
   }
   
-  /* Sección de Planillas */
+
   .planillas-section {
     border: 2px ;
     padding: 20px;
@@ -60,12 +64,12 @@
   }
   
   .planilla-title {
-    cursor: default; /* No será un enlace */
+    cursor: default; 
     font-weight: bold;
   }
   
   
-  /* Popup */
+ 
   .popup-overlay {
     position: fixed;
     top: 0;
@@ -103,4 +107,237 @@
     border-radius: 10%;
     cursor: pointer;
   }
+   */
+
+
+
+
+
+   /* Estilos generales */
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.p-items {
+  color: black;
+}
+
+/* Botón Cerrar Sesión */
+.logout-button {
+  left: 0px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80%;
+  margin-bottom: 10%;
+}
+
+/* Datos del paciente */
+.patient-data {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 2px solid;
+  color: black;
+}
+
+.patient-data h2 {
+  margin-bottom: 35px;
+  color: #fc308c;
+  text-align: center;
+}
+
+.patient-data p {
+  margin: 5px 0;
+}
+
+.patient-data strong {
+  color: #333;
+}
+
+/* Sección de Planillas */
+.planillas-section {
+  border: 2px;
+  padding: 20px;
+}
+
+.planillas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.planillas-table th,
+.planillas-table td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
+.planilla-title {
+  cursor: default; /* No será un enlace */
+  font-weight: bold;
+}
+
+/* Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+.popup-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.popup-title {
+  color: black;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.popup-content p {
+  margin: 10px;
+  padding-bottom: 15px;
+  font-size: 1rem;
+  color: black;
+  border-bottom: #FC308C solid 2px;
+}
+
+.popup-content .p-items {
+  margin-top: 15px;
+  padding-left: 20px;
+  color: black;
+  list-style-type: disc;
+}
+
+.popup-content .p-items li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.close-popup-button {
+  padding: 10px 20px;
+  background-color: #FC308C;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s;
+}
+
+.close-popup-button:hover {
+  background-color: #FC308C;
+} */
+
+
+
+
+/* Popup */
+.popup-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  color: #333;
+}
+
+.p-info{
+  border-bottom: #fc308c solid 2px;
+  padding-bottom: 10px;
+}
+
+.popup-title {
+  color: black;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Contenedor de ítems con barra de desplazamiento */
+
+.p-items-title{
   
+  margin-top: 35px;
+}
+.p-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaciado entre cada ítem */
+  margin-top: 20px;
+  max-height: 300px;  /* Máxima altura para los ítems */
+  overflow-y: auto;   /* Agregar scroll cuando los ítems exceden la altura */
+}
+
+/* Caja individual para cada ítem */
+.item-box {
+  border: 2px solid #fc308c;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la consigna */
+.item-consigna {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Estilo de la respuesta */
+.item-respuesta {
+  font-size: 1rem;
+  color: #555;
+}
+
+
+/* Botón de cierre */
+.close-popup-button {
+  padding: 10px 20px;
+  background-color: #fc308c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s;
+}
+
+.close-popup-button:hover {
+  background-color: #e52b7f;
+}
+
+
