@@ -1,0 +1,266 @@
+/* .container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-btn {
+    background-color: var(--fucsia);
+    color: white;
+  }
+  
+  .add-btn {
+    background-color: grey;
+    color: white;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .edit-btn {
+    background-color: var(--fucsia-claro);
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: var(--fucsia);
+    color: white;
+  }
+   */
+
+
+
+
+
+
+
+   :root {
+    --fucsia: #d63384;
+    --fucsia-claro: #e673a8;
+    --gris: #6c757d;
+    --gris-claro: #adb5bd;
+  }
+  
+  .container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos de controles */
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 8px;
+    border: 1px solid var(--gris-claro);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  select:hover {
+    border-color: var(--fucsia);
+  }
+  
+  /* Botones */
+  button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .search-btn {
+    background-color: var(--fucsia);
+    color: white;
+  }
+  
+  .search-btn:disabled {
+    background-color: var(--gris);
+    cursor: not-allowed;
+  }
+  
+  .add-btn {
+    background-color: var(--gris);
+    color: white;
+  }
+  
+  .add-btn:hover {
+    background-color: var(--gris-claro);
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  /* Estilos de tabla */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .edit-btn {
+    background-color: var(--fucsia-claro);
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: var(--fucsia);
+    color: white;
+  }
+  
+
+/* 
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+  }
+  
+  .popup-content input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+  }
+  
+  .popup-content button {
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+  } */
+  
+
+
+
+
+
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 400px;
+}
+
+.input-field {
+  width: 96%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3rem;
+  background-color: #fff;
+  color: #333;
+}
+
+.select{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+
+.input-field::placeholder {
+  color: gray;
+}
+
+button {
+  padding: 10px 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--fucsia-claro);
+}
+

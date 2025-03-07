@@ -47,7 +47,6 @@ const Sidebar = () => {
   const toggleNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
     if (!isNotificationsOpen) {
-      // Si se abren las notificaciones, se restablece el contador a 0
       setNotificationCount(0);
     }
   };
@@ -110,9 +109,12 @@ const Sidebar = () => {
             <li>
               <Link to="relojfichada" onClick={handleLinkClick}>Reloj Fichada</Link>
             </li>
-            {/* <li>
-              <Link to="auditoria" onClick={handleLinkClick}>Reloj (Fichadas)</Link>
-            </li> */}
+            <li>
+              <Link to="AltaModif" onClick={handleLinkClick}>Alta / Modificación</Link>
+            </li>
+            <li>
+              <Link to="Medicacion" onClick={handleLinkClick}>Medicacion</Link>
+            </li>
           </ul>
 
           <button onClick={handleLogout} className="logout-button">
